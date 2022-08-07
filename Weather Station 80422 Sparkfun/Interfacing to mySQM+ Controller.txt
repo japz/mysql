@@ -1,0 +1,74 @@
+Weather Meters Kit
+by Sparkfun Electronics
+SEN-08942
+RJ11 Sockets
+
+Station RJ11
+1 GND										: J11:GND
+2 Anemometer pin 1 - wire to Digital IO pin and 1M pulldown to GND 		: J11:SIG
+3 Anemometer pin 2 - wire to 3.3V						: J11:3V3	
+4 Wind direction (0-4.78V) - wire to Digital IO Pin and 10K pullup to 3.3V	: J12:SIG
+
+Rain Gauge RJ11
+1 NC
+2 Wire to Digital IO pin and 1M pulldown to GND					: J18:SIG
+3 Wire to 3.3V									: J18:3V3
+4 NC
+
+Note1:
+Anemometer is interrupt driven. Rising pulse on DIO pin.
+Support already in ESP32 for this.
+Granularity = 1.492mph (2.4km/h) for 1 interrupt per second.
+This requires an interrupt timer to handle interrupts from the sensor.
+Another 1s interrupt timer is required to do the calculation.
+Any value is 1.492mph * number of interrupts per second
+
+// To enable the windspeed sensor uncomment the next line
+#define WINDSPEEDSENSOR 1
+
+// To enable the Anemometer Weather Meters Kit by Sparkfun Electronics 
+// SEN-08942 [see PDF] Pulse sensor Output also uncomment the next line
+#define ANEMOMETER80422 7
+
+
+Note 2:
+Wind direction is a simple resistor divider.
+Can be measured at any time.
+Does not require interrupts.
+Input will be a Digital Pin.
+Support already in code for this.
+Values already converted in code to handle 3.3V
+Output of sensor should go through simple 1.1K/2.2K resistor divider to get to 3.3V max
+
+// To enable the Wind Direction sensor uncomment the next line
+#define WINDDIRECTIONSENSOR 1
+
+// To enable the 8 directional Analog Wind Direction sensor uncomment the next line
+#define ANALOGDIRECTIONSENSOR 2
+
+
+Note 3:
+Rain Gauge currently not supported
+0.011" of rain issues 1 interrupt
+Requires interrupt pin. Rising pulse on DIO pin.
+This could be tied to use of 1s timer (divided by 60) to count rain per minute
+Would require 3.3V on one wire to gauge
+Would require pulldown 1M to GND on other wire to gauge - which goes to input pin of sensor
+
+// To enable the Wind Direction sensor uncomment the next line
+#define WINDDIRECTIONSENSOR 1
+
+// To enable the 8 directional Analog Wind Direction sensor uncomment the next line
+#define ANALOGDIRECTIONSENSOR 2
+
+
+Recommend using separate myESP32 Daughter board to do the measurements
+myESP32 DB runs in Station mode
+Recommend using JSON support to get data from myESP32 DB into other devices like Controller
+
+Both Controller and myESP32 Daughter board would be Station Mode
+
+Alternative:
+Add Rain Gauge support into myESP32 Controller
+Support already there for Anemometer and Wind Direction
+Only need to find new pin to be used and write code

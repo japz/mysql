@@ -1,0 +1,5 @@
+Pete's PCB for ESP32 + Pi Zero on one board
+
+The Pi-Zero is to run mySQMWEB.
+
+The ESP32 runs the various sensor devices, webserver and other functions.

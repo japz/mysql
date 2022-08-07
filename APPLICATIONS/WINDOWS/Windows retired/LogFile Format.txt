@@ -1,0 +1,26 @@
+Logfile format
+0	Date
+1	Time
+2	SQM
+3	Lux
+4	IRAmbient - MLX90614 IR Temp Sensor
+5	IRObject
+6	Irradiance
+7	Frequency
+8	Firmware
+9	SetPoint1
+10	SetPoint2
+11	RainSensor - Raining/Not Raining
+12	RainVoltage
+13	NELM
+14	bmeTemp - BME280
+15	bmeHumidity
+16	bmeDew
+17	bmePressure
+18	gpsdate
+19 	gpstime
+20	gpslongitude
+21	gpslatitude
+22	gpssatelittes
+23	gpsaltitude
+24	skystate - Clear/Partly Cloudy/Cloudy/Unknown

@@ -1,0 +1,264 @@
+==================================================================================
+mySQMPUSL TCP/IP Linux Application for mySQM+ controllers
+(c) Robert Brown 2020-2022. All rights reserved.
+==================================================================================
+
+==================================================================================
+CHANGE LOG
+==================================================================================
+Major Version	1
+Minor version	1
+Revision 		1
+Build 			8
+
+
+1.1.1.8
+SERVICES
+Add new Services tab and link into background load
+Add get button to get and display controller services
+Add port settings for Management and Web servers 
+Add Get status/Start/Stop Management Server to menu
+
+INTERFACE
+Add new Interface tab
+Add Background Load groups to Interface tab
+Move buttons Temp/Distance to Interface tab
+Move buttons Static, reboot to Interface tab
+Move Background Load Timer checkbox to Interface tab
+
+TSL2591
+Add new TSL2591 tab and link into background load
+Add TSL2591 Sample Size Get/Set
+Add TSL2591 Averaging Get/Set
+Add TSL2591 Properties tslsamplesize and tslaveraging to INI file
+Add TSL2591 checkbox to connection tab, send on connect
+Add TSL2591 to background load timer
+Add shortcut key ALT+T for TSL2591 tab
+Move tsl correction factor to TSL2591 tab 
+
+BME280
+Add Sea level pressure, BME280 Altitude, backgroud load services to INI file
+Add sl-pressure and bme280 altitude to custom log file and data log file
+Add sl-pressure and bme280 altitude to Get All button and Get button on BME280 tab
+Update Get/Set buttons on BME280 tab to add altitude/pressure-adj
+
+NTP
+Add ntpUdate interval (15m to 60mm), default is 30m
+Add restart button on NTP tab (for next release)
+Remove sync rtc to ntp interval 
+
+MQTT
+Add MQTT start stop buttons 
+Add MQTT status 
+Add MQTT Subscribe enable to MQTT tab, save/restore state from INI file
+Update code for MQTT Get and Set buttons
+
+WIND
+Add sensor names to Wind tab
+
+GPS
+Add gps fix indicators to GPS tab
+
+CUSTOM LOGGING
+Add custom logging option for SL-pressure and BME280 Altitude
+Move custom logging options from logging tab to custom logging tab
+
+GENERAL
+Add Save/restore temp mode and distance mode from INI file
+Add Background Load Groups Display, GPS, MQTT, NTP, RTC, Cloud Model, TSL2591
+Add Send on Connect Display, Distance mode, GPS, NTP, Sky-Model, Temp Mode, TSL2591
+Change tab order to match Windows application
+Change order of pages on Display tab to match new firmware 128-27
+Fix for background load issues (some pages not loading due to INI file errors)
+
+
+1.1.1.6
+Add beaufort to wind tab
+Add make hay to bme280 tab
+Add send on connect NTP settings on connection tab
+Add background load timer and enable box on connection tab
+Add fields for day/month/year/hour/minute/second on rtc tab
+Add set button on rtc tab to update controller settings
+Add Set RTC to PC Date-Time to RTC tab
+Add system date/time string to RTC tab
+Add wind speed average 30s to Wind tab
+Add wind speed max gust 30s to Wind tab
+Add windavg, windgust, Beaufort, Make hay to custom logging tab
+Add timezone string to ntp tab
+Add set button on ntp tab to update controller settings
+Add Sync RTC to NTP state on NTP tab
+Add Sync RTC to NTP Time Interval on NTP tab
+Add windavg, windgust, beaufort,make hay. macaddr to data logging
+Add get windavg, windgust, beaufort to get wind values
+Add new checkboxes to INI file so they are saved/restored
+Add system uptime to connection tab
+Add system uptime to data log
+Add system uptime to refresh timer interval
+Add k1-k7, tc, toc, cfp to Sky cloud model tab
+Add set button to Sky Cloud model tab
+Add k1-k7, tc, toc, cfp to INI file
+Add checkboxes for page display option rather than string of 0 and 1
+Add page descriptions for each page on display tab
+Move custom log enable/overwrite and custom log filename to logging tab
+Fix for NTP set causing controller reboot
+Fix for MQTT set causing controller reboot
+
+1.1.1.5
+Fix log timer interval code to ensure log interval times are set correctly
+Add webserver get status, webserver start/stop service to Menu bar
+Add Connect and Disconnect links on Menu bar
+Add Compass direction text on Wind tab
+Add new [user specified] custom log filename on Custom Logging tab
+Add command line arguments processing - allows OS to start application, connect, arg = --auto and start logging without user intervention
+Add auto start options on Connection tab
+Add auto reconnect timer and interval on Connection tab
+Add shortcut keys for NTP tab (ALT+N) and the MQTT tab (ALT+Q)
+Fix for unable to edit/change page display option string on Display tab
+
+1.1.1.4
+Fix for custom logging winddirection
+Fix for log data file incorrect json string for rainfallcurrentday
+Fix for Display Page Option unable to edit
+Remove a comma in JSON logs being added before closing brace }
+Remove Log Data - Log as JSON is default
+Remove Log Custom Log as DATA, JSON is default
+Remove MQTT as JSON, JSON is default
+Remove GPS Format option
+Remove from ini and support code, gpsformat,mqttsendjson,logcustomasjson,logdataasjson
+Remove comment line from start of data log file
+Add static latitude and longitude felds to gps tab
+Add support code to handle static latitude and longitude get/set buttons
+Add MQTT publish interval field to MQTT tab and add support code
+Add windchill checkbox to Custom Logging tab
+Add windchill to logging data and custom logging
+Changes to logdatafile and logcustomdata 
+Changes to logfiles to ensure keynames match pdf 018 protocol
+
+
+1.1.1.3
+Fix for gps static state not saving/restoring correctly
+
+1.1.1.2
+Add menu item INI submenus read and save for testing purposes]
+Add custom log tab and custom logging
+Add additional log messages and status messages
+Add after connect, set tab to Main tab
+Add after disconnect, set tab to Connection tab
+Add Versioning information
+Add Version menu item (version now automatic)
+Add Clear and set buttons to clear/set custom log values 
+Add additional hints for form elements
+Add Send 'GPS settings' to Send On Connect choices
+Add ALT-Z to pop-up form listing shortcut keys
+Fix for delayonconnecttime
+Fix for skystate
+Fix for set folder - rewrite code
+Fix for MAC address showing leading Q in response
+Fix for bug in get mlx90614 skystate
+Fix for get display enabled state
+Fix for get mlx90614 object
+Fix for sky ambient conversion error in log timer
+Fix for rainfallcurrenthour conversion error in Connect
+Fix for log file data being cached (data was not being fully written to file)
+Fix for log filenames in setfolderbtn (change from mysqmpro to mysqmplus)
+Fix for ambient, humdity, dewpoint, sky ambient, sky object, rvout, cloud cover percent
+    windspeed, wind chill factor and rainfall to show two decimal places
+Fix for main tab value of bme280 ambient temperature not showing Fahrenheit values
+Fix for log files not showing decimal places for windspeed, rainfall, 
+Fix in log data file for rainfall values shown incorrectly when JSON is selected
+Fix for custom log file not logging values with decimal places
+Fix for custom log file not logging cloudcover percent correctly
+Fix for GetAll not showing decimal places for some values
+Fix for Get on SkyCloudModel tab not showing skyobject/skyambient values with decimal places
+Fix for Get on Rain tab not showing rvout with decimal places
+Fix for logdatatofile as JSON writing a closing } twice 
+Fix for switching to Main tab when connection fails
+Fix for firmware version showing as null in data logs
+Fix for } showing at end of custom log when json is not selected
+Fix for comma between data and time of cloud sensor II log files
+Fix for single quote appearing in custom log files - non json
+Fix for gps details not clearing after Disconnect
+Rewrite disconnect and exit code
+Rewrite file routines - files only created when referenced
+Rewrite handling of responses
+Rewrite header information for Data log files
+
+1.1.1.1
+Add versioning information
+
+019
+Rewrite of application
+
+018
+Rename units, forms and project name
+
+017
+Add error handling for data format conversions
+Save/Restore LogData, LogErrors, LogCS2 checkbox states in INI file
+Add error handling to file operations
+Add autodetect logpath on startup, ask user for location folder to store logfiles
+
+016
+Add CSII logfile
+Add CSII Settings tab
+Add CSII settings to INI file
+Add MQTT Settings tab
+Add MQTT settings to INI file
+Add GPS data to datalog file instead of "" no information
+Add header line to datalogfile
+Change Logfiles date stamp to yyyy-MM-dd
+Move Connected State and Status from Connection Tab to above Status Messages
+Rename MLX90614 tab to Cloud Model tab
+Remove Lux sensor configuration tab
+Remove Lux sensor gain and integration settings from INI file
+
+015
+Combine TCP/IP and Serial Interface into single application
+
+014
+Wrap firmware calls around firmware file version so application does not hang on older firmware
+
+013
+Add OLED tab
+Add Rainfall to Rain tab
+Add Syn RBG to RTC button on rain tab
+Add RTC tab
+Add NTP tab
+Add Reboot button to Connection tab
+Add MAC Address field on Connection tab
+Remove graph logo icon
+Add Wind Chill Factor to Wind tab
+Add Rainfall values to data log file
+
+012
+Change header of log files to MYSQMPLUS
+
+011
+Convert pressure to double
+
+009
+Add datalogfilename, tcp/ip address and refreshtimer interval to INI settings, 
+save on exit, reload on start
+Add 1m refresh interval to datalog timer
+Add label on logging page to indicate refresh timer status
+
+
+008
+Change logfile format CLEAR / CLOUDY to 0 / 1
+Check Data log file formatting
+
+007
+Fix rvout issue
+Fix time stamps on graphs
+Add mps field to Rain tab
+
+006
+Implement graphs
+
+004 
+remove setpoint1/2
+add logging
+set gps fix checkbox to disabled
+
+
+

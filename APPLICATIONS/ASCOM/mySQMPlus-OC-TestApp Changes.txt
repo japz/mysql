@@ -1,0 +1,44 @@
+mySQMOCTestApp :Observing Condition Test Application
+
+(c) R Brown, 2020-2021
+All rights reserved
+
+
+1_0_0_13
+Fixes to work with mySQM+ ASCOM OC driver v014 and higher
+
+1_0_0_12
+Fix for exception handling returned from ASCOM OC Driver
+Rename application
+
+1_0_0_11
+Fix for SkyTemperature not being retrieved when connecting
+
+1_0_0_10
+Add clear all and get all buttons
+
+1_0_0_9
+Update GUI
+Fixes for disconnection, connection, TCP/IP and USB Serial
+Add Rainrate
+Show data parameters when retrieved
+Add clear timer to Status field
+Add connection status 
+
+107
+Give indication of when connected
+
+106 
+Add windspeed, wind direction, cloudcover
+
+104 11122017
+Small changes to interface
+
+103 28102017
+Change certificate signing to 2022
+
+102 25102017
+Prevent form from being resized
+
+101 25102017
+Add version number to title bar of window

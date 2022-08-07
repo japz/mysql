@@ -1,0 +1,304 @@
+-----------------------------------------------------------------
+mySQM+ Windows Application
+(c) Robert Brown 2020-2022, All rights reserved.
+brown_rb@yahoo.com
+-----------------------------------------------------------------
+
+Permission is granted for personal/academic/education use only.
+
+
+-----------------------------------------------------------------
+Change log
+-----------------------------------------------------------------
+
+0.0.5.5
+Fix for SYNC RBG to RTC text on Rain-Wind tab
+
+0.0.5.4
+Change tabular layout (rain-wind and bme-mlx)
+main tab has most values
+fix error where windspeed value was cleared when wind max gust was updated
+fix shortcuts
+Change GUID
+
+0.0.5.3
+Fix for MQTT Publish interval (MQTT tab, now in seconds)
+
+0.0.5.2
+Fix for ntpclient showing incorrect state
+
+0.0.5.1
+Add shortcut AT-T for TSL2591 tab
+
+0.0.5.0
+CHANGE CLASS ID
+OLD GUID 4e9e20cb-9a24-4765-9781-3c00448e0792
+NEW GUID cf82bb44-b008-4549-8ae8-bfda7dac0efd
+Update support for protocol 031
+Remove sync rtc to ntp interval
+Add ntpUdate interval range 15m to 60m 1hr, default is 30m - 18000
+Add MQTT start stop buttons 
+Add MQTT status 
+Add MQTT Subscribe enabled state 
+Add NTP status to NTP tab
+Add new tsl2591 tab 
+Move tsl correction factor to tsl2591 tab 
+Add TSL2591 Sample Size Get/Set 
+Add TSL2591 Averaging Get/Set 
+Add Properties tslsamplesize (int 5-100) and tslaveraging (bool) 
+Update services tab with support for Management server 
+Add Get status/Start/Stop Management Server to menu 
+Add Get status/Start/Stop TCPIP Server to menu 
+Add restart button on NTP tab 
+Add TSL2591 tab to Background Load group on the Interface tab 
+Add TSL2591 tab to Send On Connect group on the Interface tab 
+Fix error in Web Server and Management Server not starting/stopping 
+Fix for MAC address truncated by 1 digit
+Fix for NTP Timezone not changing
+Fix for Display Option String errors in Set and Get
+
+0.0.4.0 
+Changed order of tabs
+main, sky cloud model, bme280, rain, wind, gps, mqtt, ntp, rtc, display, services, csii settings,
+custom logging, logging, interface, connection
+Services tab				  
+gps fix indicators			
+change TLS to TSL			
+Wind speed/direction sensor names   
+K1-K7 get/set                       
+gps_altitude is now float			
+string leading char of response msg changed to $, required by firmware 127-05 
+
+0.0.3.9 
+Fix for cloud flag percent sending wrong value in Set button for Sky Cloud Model tab
+Add connection tab
+
+0.0.3.8
+Add BME280 Altitude
+Fix custom logging of bme280alt (wrong value written to logfile)
+
+0.0.3.7
+Remove serial interface
+Add slpressure
+
+0.0.3.6
+Fix for spelling mistake on Display tab
+
+
+0.0.3.5
+Fix for incorrect logging values related to wind speed average and max gust
+
+0.0.3.4
+Fix for windir not showing in data logfile
+Change JSON keynames to match other logging applications and MQTT by the controller
+
+0.0.3.2
+Add windavg to custom logging tab
+Add maxgust windspeed to custom logging tab
+Add windavg/maxgust to json log file
+Add windavg/windgust to clearall and setall buttons on custom logging tab
+
+0.0.3.1
+[Only use on firmware 125-60 or higher]
+Add windavg to Wind tab
+Add maxgust to Wind tab
+Add windavg and maxgustto wind graph on wind tab
+Add windavg and maxgust to json log file
+Remove firmware version check for firmware < 123
+
+0.0.3.0
+Resize groups on display tab to prevent text clipping
+
+0.0.2.9
+Change Pg1-Pg7 on display to to meaningful text
+
+0.0.2.8
+tz.h added to allow set/change/read user time zone code
+Add timezone list box for selecting time zone
+Add NTP UTC
+Add NTP Time Zone string
+Add background load timer to get non-sensor data at timed intervals
+Add form to get users choice for color of background load tasks
+Change page display string to check boxes
+Change loading of data on connect - only load sensor data
+Change forms ntp/display/mqtt/gps/rtc/sky-k1-k7/toc/tc/cfp for delayed load
+Fix for Clearall and Setall on custom logging tab not working
+Remove gmtoffsetseconds and daylightoffsetseconds to NTP tab
+Remove old time zone settings
+Remove log interval 15s
+
+0.0.2.7
+Upgrade to firmware 125-4
+Remove TimeZone from NTP tab
+Add gmtoffsetseconds and daylightoffsetseconds to NTP tab
+Remove NTP Query time and NTP Sync Hour from NTP tab
+Add NTP Sync Interval to NTP tab
+Add shortcut key ALT+W for Wind tab
+Fix for auto log interval not being set correctly
+
+0.0.2.6 22-Nov-2021
+Add option on RTC tab to send computer date/time to controller
+Fix for sending rtc date/time in wrong format
+
+0.0.2.5
+Fix for shortcut M not going to Main tab
+
+0.0.2.4
+Add reconnect timer in case auto-connect failed
+Consolidate code
+Fix for Ping success form showing error icon
+
+0.0.2.3
+Add auto connect and auto logging options
+Add user specified custom log filename 
+
+0.0.2.2
+Add compass direction indicator to Wind tab
+
+0.0.2.1
+Add Start/Stop webserver, and Get webserver status [requires firmware 124-4 or higher]
+Remove compass dial indicator from Wind tab
+
+0.0.2.0
+Rename NTP Sync Time to NTP Sync Hour on NTP tab
+
+0.0.1.9
+Remove gpsformat
+
+0.0.1.7
+Ensure that all logged data element names conform to that laid out in the PDF
+
+0.0.1.6
+Fix for json log file unterminated on makehay
+
+0.0.1.5
+Fix for set tls correction factor
+Remove MQTT JSON support
+Add Send on connect GPS options
+Add custom logging tab
+Support for make hay and system uptime
+Fix for not disconnecting when controller returns null or incorrect data
+Add GPS static coordinates on GPS tab
+Add GPS Truncate, Static and Format (decimal/degree) to GPS tab
+
+0.0.1.4
+Add system up time [Connection tab]
+
+0.0.1.3
+Add TLS sensor correction factor to tls tab
+
+0.0.1.2
+Fix for Rainfall_prev_hr showing incorrect values
+
+0.0.1.1
+Change filename and logged data date/time from dd-MM-yyyy to yyyy-MM-dd
+Change filenames from mySQMPLUS to mySQMPlus
+Fix for gpsdata in log files
+Add Shortcut keys and Menu for Shortcuts
+
+0.0.1.0
+Fix for page display option string on display tab obscuring text
+Fix for CSII logging issues
+Fix for datalogfile (not CSII) output format (change xx,xx to xx.xx) - override locale settings
+Fix for locale issues (RainVolts) causing problems with Excel loading logfiles
+Fix for Cloud Model tab, CFP, TC and TOC values wrong type and invalid checking
+Fix for IntervalTimer logging issue
+Add rain tipping bucket data to datalog file
+Add CSII settings page for boundary checks when generating CSII log file
+
+0.0.0.24
+Fix for Exit dialog choices being ignored
+
+0.0.0.23
+Add connection status to main form
+Add status for logging timer (logging tab)
+Fix for date/time in CSII log file
+Change MLX9014 tab name to Cloud Model
+
+0.0.0.22
+Fix for MQTT system call when connecting
+
+0.0.0.20
+Fix for Get MQTT Publish topic
+Add MQTT Subscribe topic to MQTT tab
+Add MQTT data to retrieve from controller when connecting
+
+0.0.0.20
+Fix for Get MQTT Publish topic
+Add MQTT Subscribe topic to MQTT tab
+Add MQTT data to retrieve from controller when connecting
+THIS IS A MAJOR UPDATE.
+UNINSTALL APP USING CONTROL PANEL BEFORE INSTALLING THIS VERSION
+
+0.0.0.19
+Change logging tab, to use Start and Stop data logging buttons
+
+0.0.0.18
+Fix for connection issues
+
+0.0.0.16
+Change to CloudCover for CSII/Boltwood files - now using 3 cloud states
+
+0.0.0.15
+Fix serial usb issues
+Remove tsl2591 tab
+
+0.0.0.14
+Prevent resizing of Ping form
+
+0.0.0.13
+/Make sure cloud sensor data file is single line and new data overwrites old data
+
+0.0.0.12
+REMOVE OLD VERSION USING CONTROL PANEL BEFORE INSTALLING THIS VERSION
+Fix for Rain Timer causing disonnect from controller\
+
+0.0.0.11
+REMOVE OLD VERSION USING CONTROL PANEL BEFORE INSTALLING THIS VERSION
+Fix for runtime error getting rtc values
+Fix for Set NTP button sending wrong values
+Fix for error in get rtc utp date/time 
+Fix for Serial DelayOnConnect not working
+Add © symbol
+Add pagedisplayoption saved/restored in/from Windows profile
+Add Send on Connect group on Interface tab
+Rewrite event handler for DisplayPageOption string
+Change TempMode and DistanceMode buttons on Connection tab to Checkboxes
+Delete Graph button and place Graph Window under Utils menu option
+
+0.0.0.10
+For for some values being truncated
+Fix for some MQTT values causing exception errors
+
+0.0.0.9
+Fix for connection issue when ENABLENTP is enabled in firmware
+
+0.0.0.8
+Add additional connection messages
+Fix for text entry of ntp servername
+
+0.0.0.7
+Add edit/update settings for MQTT, RTC and NTP to controller
+
+0.0.0.6
+Fix connection issues
+Change name OLED tab to Display tab
+
+0.0.0.5
+Fix for text clipped on Connection tab
+
+0.0.0.4
+Rearrange Connection tab
+
+0.0.0.3
+Add Utils menu
+Add Ping
+
+0.0.0.2
+Remove TCP/IP related options from Settings menu
+Fix for Serial Read timeout not being applied
+Fix for DelayOnConnect not being applied
+
+0.0.0.1
+Change to app - support both TCP/IP and Serial in this application
+Initial release

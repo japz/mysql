@@ -1,0 +1,7 @@
+mysqmplus-Linux Application changes file (TCP/IP)
+(c) Robert Brown 2014-2021
+All rights reserved.
+Permission is granted for personal/academic/education use only.
+brown_rb@yahoo.com
+
+https://sourceforge.net/projects/mysqmproesp32/

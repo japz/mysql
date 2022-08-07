@@ -1,0 +1,26 @@
+mySQM+ Log Viewer Application
+© Robert Brown, 2020-2021
+All rights reserved
+
+0.0.0.6
+Add average wind speed
+Add max wind gust
+
+0.0.0.5
+fix for issues with zoom at 200, 500, 1000
+
+0.0.0.4
+Changes to json parsing, adjusted to conform to key names/value pairs as outlined in PDF
+
+0.0.0.3
+Add datpoint tab, show/hide datapoint values
+Add reload data log file option
+Add additional zoom buttons to handle a large number of data points
+Add controller info to Loadtab
+
+0.0.0.2
+Rewrite of original code
+Add JSON file handling to support mySQM+ JSON LOGGER application
+
+0.0.0.1
+Initial release

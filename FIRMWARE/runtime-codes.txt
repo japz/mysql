@@ -1,0 +1,124 @@
+Runtime Codes
+
+ACCESSPOINT
+APM-0	setup(): #if (CONTROLLERMODE == ACCESSPOINTMODE) 
+
+BME280
+BME-0	mybme280->begin()
+BME-1	loop(): case state_bme280update: 
+BME-2	mybme280->read_sensor()
+
+DISPLAY
+DIS-0		mydisplay->begin()
+DIS-1		loop(): case state_rainsensorupdate:
+DIS-2		mydisplay->update_oledtextdisplay()
+
+ESPNOW
+ESN-0		setup(): #if defined(ENABLEESPNOW)
+ESN-1		loop() case state_espnowcheck:		
+ESN-2		init_espnow()
+ESN-3		void espnow_datareceived() // when an espnow msg arrives
+
+EXTERNAL RAINFALL
+EXR-0		init_rainfall()
+EXR-1		loop(): case state_rainsensorupdate: 
+EXR-2		calcraining()
+
+GPS
+GPS-0		mygps->init()
+GPS-1		loop(): case state_gpsupdate:
+GPS-2		mygps->loop()
+
+JSON SUPPORT
+JSS-0		setup(): #if defined(ENABLEJSONSUPPORT)
+JSS-1		loop(): case state_jsoncheck:
+JSS-2		getjson() start
+JSS-3		getjson() end
+
+MANAGEMENT SERVER
+MSV-0	mymngmntserver->start_server()
+MSV-1	loop(): mymngmntserver->loop()
+MSV-2	.loop() every 7500th time - around 
+
+MLX90614
+MLX-0	mybme280->begin()	
+MLX-1	loop(): case state_mlx90614update:
+MLX-3	mymlx90614->readsensor->read_sensor()
+
+MQTT
+MQT-0	mqtt_client->init_client()
+MQT-1	loop(): _mqttclient.loop()
+MQT-2	loop(): case state_mqttserver:
+MQT-3	loop(): case state_mqttserver: reconnect
+MQT-4	loop(): case state_mqttserver: subscribe
+MQT-5	mqtt_client->connect_tobroker()
+MQT-6	mqtt_client->reconnect
+MQT-7	mqtt_client->publish_mqtt
+
+NTP
+NTP-0		start_ntpclient()
+NTP-1		loop(): case state_ntpclientupdate:
+NTP-2		ntp.loop  (ntpclientstate == RUNNING), call updateNTP()
+NTP-3		loop(): case state_ntpclientreconnect:	
+
+OTA
+OTA-0		setup(): #if defined(ENABLEOTAUPDATE)
+OTA-1		loop(): case state_otaupdate: ArduinoOTA.handle()
+OTA-2		mymngmntserver->start_server Elegant OTA init
+
+RAINBUCKET
+RAB-0		init_rainbucket();
+RAB-1		loop(): case state_rainsensorupdate: 
+RAB-2		calc_rainbucket_totals()
+
+RAIN SENSOR
+RAI-0		myrainsensor->begin()
+RAI-1		loop(): case state_rainsensorupdate: 
+RAI-2		myrainsensor->get_rainstate()
+
+READWIFICONFIG
+RWC-0	setup(): #if defined(READWIFICONFIG)
+
+RTC
+RTC-0		myrtc->start_rtc()
+
+STATIC GPS
+SGP-0		mystaticgps->init()
+
+STATION MODE
+STM-0	setup(): #if (CONTROLLERMODE == STATIONMODE)
+
+TASK TIMER
+TTR-0		init_task_timer()
+
+TCPIP SERVER
+TCP-0		mytcpipserver->start_server()
+TCP-1		loop(): if ( tcpipserverstate == RUNNING )
+TCP-2		mytcpipserver->check_client() - New client requesting connection
+TCP-3		tcpip client data available()
+
+TSL2591
+TSL-0		mytsl2591->begin()	
+TSL-1 		loop(): case state_tsl2591update:
+TSL-2		mytsl2591->configuresensor()
+TSL-3		mytsl2591->readsensor()
+
+WEATHER UNDERGROUND
+WUG-0	setup(): myweatherugnd = new WEATHER_UNDERGROUND()
+WUG-1	loop(): case state_weatherundergroundupdate:
+
+WEBSERVER
+WSV-0	mywebserver->start_server()
+WSV-1	loop():  mywebserver->wsloop()
+WSV-2	wsloop() every 7500th time - around 
+
+WIND DIRECTION
+WID-0		setup(): #if defined(WDIRSENSOR)
+WID-1		loop(): case state_windsensorsupdate:
+WID-2		readwinddirection()
+
+WIND SPEED
+WIS-0		setup(): #if defined(WSPEEDSENSOR)
+WIS-1		loop(): case state_windsensorsupdate:
+WIS-2		pulse_anemometer_readwindspeed(),  readwindspeed()
+

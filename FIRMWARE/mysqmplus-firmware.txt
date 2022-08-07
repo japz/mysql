@@ -1,0 +1,1521 @@
+--------------------------------------------------------------------------------------------------------------------------------------------
+mySQM+ FIRMWARE CHANGE FILE
+Copyright R. Brown, 2020-2022. All rights reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+COMPILE ENVIRONMENT : Tested with 
+--------------------------------------------------------------------------------------------------------------------------------------------
+Arduino IDE 1.8.19
+Arduino ESP32 Core 2.0.3
+
+Libraries
+  ArduinoJSON  	[Benoit Blanchon] 6.19.4		https://github.com/bblanchon/ArduinoJson
+  ElegantOTA    	[Ayush Sharma] 2.2.8		https://github.com/ayushsharma82/ElegantOTA
+  ESP32FS          	[me-no-dev] 1.0			https://github.com/me-no-dev/arduino-esp32fs-plugin/releases/
+  ESP8266 and ESP32 OLED driver for SSD1306 displays 4.1.0
+								https://github.com/ThingPulse/esp8266-oled-ssd1306
+  ezTime            	[Rop Gonggrijp] 0.8.3		https://github.com/ropg/ezTime
+  myOLED
+  OneWire 2.3.6						https://github.com/PaulStoffregen/OneWire
+  PubSubClient 	[Nick O'Leary] 2.8			https://github.com/knolleary/pubsubclient
+  Time 1.6.1 		[Paul Stoffregen]			https://github.com/PaulStoffregen/Time
+  Wire [as installed with Arduino 1.8.19]
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+FIRMWARE REVISION CHANGES
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+129-04
+Fix for RainBucket not showing totals
+
+129-03
+Fix wind direction not updating when using OFFBOARD
+Fix vpd and other var issues when using mySQMWEB (caused by incorrect names in mySQM+)
+
+129-01
+Class initializers
+Convert wind direction to class
+Add authenicate to delete, upload, notfound Management Server pages
+Fix text message error in Management Server handlers
+Fix for otaupdate_defines.h reference (Ryan P)
+Fix error of multiple defines for OTA (Ryan P)
+Fix controller reboot when changing cloud model values (Ryan P)
+Fix for /admin12 webserver state shown incorrectly
+
+123-38
+Fix for K1-K7 values not updating when using Windows Application
+Fix for otaupdate showing as false when Elegantota is enabled (/admin12)
+
+123-37
+Fix for error when trying to compile when ENABLEOTAUPDATE was defined
+Fix for management server crash when /admin6 was used to set the cloud model values
+Fix for tcpip server crash when case 44: was used to set the cloud model values
+
+128-36
+Public release
+
+128-35RC7
+Fix for MLX90614 redefining the I2C address value
+Fix for wind direction offset /admin3
+Fix for 3D print as5600 wind direction compilation error
+Fix for error in /data/cmds.html file
+Fix for error in management server - otaupdate undefined variables
+Fix error in MQTT subscribe callback
+
+128-35RC6
+Change wind direction offset as displayed in /admin3 [Graham H]
+Fix for ESP32RTC
+Fix for TEXTDISPLAY not updating after a reboot
+Fix for incorrect NTP error message
+
+128-35RC5
+Add winddiroffset [Graham H] to tcpip server, controllerdata, management server
+Add reboot delay to controllerdata
+Rewrite all init/info/warning/error messages
+Rewrite initialization code for gps (and static gps)
+Remove orphaned defines from previous versions
+Fix for espnow compilation error
+
+128-35RC4
+Add reboot icon for graphic display
+Change getjson() to return type bool
+Change init_espnow() to return type bool
+Remove all init messages from classes, now in the class handlers
+Rewrite init functions for classes and ensure all init() and start() return bool type
+Fix ipStr not showing local ip
+
+128-35RC3
+Add Graphic display
+Add description for Beaufort on Web Home Page from WMO classification [Graham H]
+Change rain on Web Server Home page (was 0 or 1, now No or Yes)  [Graham H]
+Change to tasktimer, remove conditional defines
+Remove delay(10); from all code: legacy code left from esp8266 prototype
+Rewrite Display code
+Rewrite NTP checks in main loop()
+Simplify code that starts/restarts ntpclient in main file, managementserver.cpp and tcpip_server.cpp
+Fix for controller reboot when 3D-Print Anemomter is enabled (Graham H)
+Fix for windspeed value not changing when a pulse type Anemometer is enabled (Graham H)
+Fix for Invalid digit when External Rainfall and RTCESP32 are defined
+Fix for External Rainfall being reset twice when time is 08:59am
+Fix for ACCESSPOINT error of undefined mySSID_1 and myPASSWORD_1
+Fix for display not starting when disabled then enabled in Management and TCPIP Servers
+
+128-35RC2
+Cosmetic text change /admin7.html for MQTT Subscribe Enable []
+Cosmetic text change /admin6.html for NTP Interval time []
+Fix for Web server JSON reponse /date - source not in ""
+Fix for Web server JSON responses /tsl (samplesize and averaging) /mqtt (client_state), /ntp (rtcsyncntp)
+Fix for Web server home page JSON response (gps date/time/lat/lon values not in "")
+Fix for data/cmds.h file, change tls to tsl
+Fix for data/cmds.h file, remove buttons at bottom of page
+Fix for AdminPg.replace("%RAI%", ENABLEDSTR)); in ManagementServer.cpp [Graham]
+Fix for Web server index page not changing rain condition dry-wet [Graham]
+
+
+128-35RC1
+Add /cmds to Web Server (lists commands that the webserver supports)
+Add averaging and sample size to /tsl json response from Web Server
+Add Watchdog Timer
+Add runtime debug code
+Add checkboxes to set display page options on /admin4 of Management Server
+Change /tlscf call in web server to /tsl and add averaging and samplesize to JSON response
+Fix CRITICAL for /download causing non-response
+Fix incorrect debug messages /admin8
+Fix incorrect debug messages /admin11
+Fix for calculating rain totals (rain values start at 9am each day - previous totals where from 11:59pm)
+
+128-35
+Fix for Management Server /admin6 NTP showing NTP as connected when NTP is not connected
+
+128-34
+changed json calls /mqtt and /ntp on webserver
+
+GENERAL 128 CODE BASE (128-00 to 128-33)
+Change layout of controllerconfig.h file
+Change SQM conversion formula 0.4 -> 0.45 for more realistic sqm value
+Create new /defines folder and move variable settings from controllerconfig.h file to separate files in the /defines folder
+Add new rssi and heapmsg functions
+Add helper function set_date_time_strings() and use in classes that generate date/time strings
+Add port checking for services in Management, TCPIP and Web servers
+Add checks for Management Server/Web Server/TCPIP Server loop code
+Change Management Server/Web Server/TCPIP Server Start code to allow restarting with a different port number
+Change mylatitude and mylongitude to char[]
+Change majority of strings to char[] 
+Change to new protocol 031, update TCP/IP server code
+Remove dependancy of Webserver for JSONSUPPORT
+Remove obsolete/redundant debugging statements
+Remove checkip
+Fix for compilation warnings about un-initialised variables (gps, rtc)
+Fix error in debug print for Weather Underground
+Fix undefined reference in rainfall.h (when EXTERNALRAINFALL is enabled)
+Fix for RTC initialisation overwriting existing RTC values on reboot
+Fix error in calculation of previous days rainfall (rainbucket.h)
+Fix for /download creating a null file when the file is not found
+Fix error in copy_tm_struct() - month was incorrectly being set
+
+CLASSES
+Create classes for all sensors (TSL2591, BME280, MLX90614, RAIN, GPS) 
+Create classes for all services/servers (DISPLAY, TCP/IP, NTP, MQTT, mDNS, RTC, Weather Underground, Webserver)
+Add helper functions for all classes so that #defines can be minimised 
+
+TASK TIMER
+Change to tasktimer, using unsigned int for max count values related to MQTT and NTP
+Fix task timer errors when using longer delay times
+
+CONTROLLER DATA CLASS
+Rename mysqmsetupdata files as ControllerData and rename class to ControllerData
+Add GPS format (DD/DMS)
+Add Management Server port number
+Add MQTT Authentication (enable/disable, name, password)
+Add MQTT keepalive
+Add MQTT Subscribe enable/disable
+Add TSL2591 Averaging enable/disable
+Add TSL2591 Sample size
+Remove GPS boot mode
+Remove mDNS name
+Remove SYNC RTC to NTP Interval time
+
+DISPLAY CLASS
+Change order of display screens
+Remove #if statements
+Fix for display page time being truncated
+Fix for page display string not updating correctly when less than 9 digits
+
+GPS CLASS
+Add DD and DMS gps formats (Decimal and Degree Minutes Seconds)
+Add Static GPS class to handle static values for myLatitude and myLongitude
+Add new code to handle static gps values, including truncate and DD and DMS formats
+Generate truncated geo-location values in code that parses NMEA messages
+Change gps updates to 2s polls
+Checking for GPS update moved into main state machine and now controlled via the task timer
+Rewrite gps latitude and longitude decode routines
+Rewrite truncate routines to cover new latitude and longitude formats
+Fix Critical for gps not displaying latitude and longitude for negative degrees ('S' and 'E')
+Fix for GPS var gll_position_mode_indicator returning null
+Fix for GPS not working with longer task times
+Fix for GPS not recovering from no response or invalid responses
+Fix for latitude and longitude not updating after a change in truncate/static state from Management Server
+  
+MANAGEMENT SERVER CLASS
+Add new Management Server
+Add authentication to Management server and all admin files
+Add MQTT start stop to Management Server /admin7 MQTT page
+Add GPS format choice (DD or DMS) to Management Server GPS page /admin2
+Add raw GPS geo-location values to GPS page /admin2
+Add Webserver management to /admin1 (start, stop, change port)
+Deprecate RECEIVEMQTTCOMMANDS - Move to Management Server
+Move all admin functions from Web server to Management server
+Move ElegantOTA from Web server to Management server
+Remove mDNS from Management Server System page - mDNS deprecated
+Rewrite file not found method
+Fix for controller reboot not redirecting and loading page after a controller reboot
+Fix for /admin9 code to set RTC, simplify
+
+mDNS CLASS
+Delete mDNS Service [deprecated]
+
+MQTT CLASS
+Add mutex around the use of mqtt_subscribemsg_flag
+Add keepalive (15-180s)
+Add MQTT subscribe enable to Managment and TCPIP servers
+Add MQTT authentication (enable, disable, name, password to ControllerData and on /ad
+Deprecate MQTT RECEIVEMQTTCOMMANDS from controllerconfig.h
+Implement range check for MQTT Publish interval (now in seconds, 60-1800, default 60)
+Remove duplicated (and orphaned) code for reconnecting to MQTT broker
+Tidy text descriptions /admin6
+Fix for MQTT connect authentification error
+Fix for MQTT reconnection issue
+Fix for JSON message - Firmware  was changed to string type
+
+NTP CLASS
+Implement range check for NTP Update interval (now in minutes, 10-60, default 30)
+Remove redundant code from NTP Client
+Fix for NTP last update displaying incorrect values
+Fix for updateNTP not working
+Fix for NTP reconnect not working
+Fix errors in NTP when using ESP32RTC with NTP Enabled
+
+RTC CLASS
+Deprecate SyncRTCtoNTP Interval Time (sync RTC to NTP is done at same time as updateNTP)
+Fix error in RTCESP32 when NTP is disabled
+Fix for RTC initialisation overwriting existing RTC values on reboot
+Fix in /admin9 code to set RTC, simplify
+Fix errors in RTC/NTP when using ESP32RTC with NTP Enabled
+
+TCPIP SERVER CLASS
+Delete comms.h file and migrate to new TCPIP Server class
+Add multiple connections (up to 4) to TCPIP server class
+Add calls to TCPIP server to Start/Stop Management Server, and return Management Server state
+Add get NTPClientstate to TCPIP server
+Add NTP update interval get/set to TCPIP server
+Add MQTT start stop to TCPIP server
+Rewrite code handling based in new protocol 031
+Fix for ntp update always starting with default 30m
+
+TSL2591 CLASS
+Improvements to TSL2591 sensor code
+Add averaging and sample size to TSL2591 code
+Add settings control for TSL2591 in Management Server
+Add TSL2591 Sample Size Get/Set helpers to controllerdata, Management and TCPIP Servers
+Add TSL2591 Averaging Get/Set helpers to controllerdata, Management and TCPIP Servers
+Fix for TSL2591 sensor code (occassionally gain and integration time were not set correctly)
+Fix for sample size and averaging not in sync with controller values
+
+WEB SERVER CLASS
+Delete webserver.h file and replace with new sqmwebserver class
+Add MQTT subscribe enable state to /mqtt json response
+Delete rtcsynctime from /ntp request, rtcsynctime deprecated
+Include user custom json code into web server
+
+WEATHER UNDERGROUND CLASS
+Code overhaul, upload all values.
+
+UNCHANGED (these have not been placed into a class, and only minor code fixes have been applied)
+ESPNOW
+JSONSUPPORT
+WINDSPEED
+WIND DIRECTION
+RAINFALL EXTERNAL
+RAIN BUCKET
+
+-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+
+127-xx End of Line, Migrated to 128-00 branch
+
+127-07
+Fix for undefined errors windspdname, winddirname, counters/flags/Mux vars in tasktimer.h
+
+127-06
+Fix for wind speed sensor compiler error
+
+127-05
+Add GPS Positional fix information for each NMEA message type
+Add GPS boot mode, Hot, Warm, Cold on /admin2 web page
+Add GPS init code to manage start of GPS unit
+Add GPS retry command when gps no response occurs
+Add firmware call (76) to return wind speed and direction sensor names
+Add firmware call (52) to return service indicators
+Add firmware call (93) to return all GP Position fix indicators
+Change compilation errror dependancy messages to better explain what is required
+Change firmware call (12) to return gps altitude as a float value
+Change *protocol* of return values in firmware calls - leading char identifier is dropped
+Change setup_task_timer name to init_task_timer (tasktimer.h)
+Change refresh rate of TSL2591 sensor from 5s to 3s
+Correction, global change from "tls2591" and "tlscorrectionfactor" to "tsl2591" and "tslcorrectionfactor"
+Improve code in rainbucket.h for use of update flags used with task timer
+Improve code in rainfall.h for use of update flags used with task timer
+Improve code in rainsensor.h for use of update flags used with task timer
+Improve code in tsl2591sensor.h for use of update flags used with task timer
+Remove compilation check for LOCALTIME in controllerconfig.h (deprecated)
+Remove Fix type, replace with detailed Positional Fix information
+Replace firmware calls (51-57) with one call (51) that returns all k1-k7 values
+Replace firmware calls (61-67) with one call (61) that sets all k1-k7 values
+Rewrite controller config file handling code (mysetupdata.cpp)
+Rewrite mqtt init, startclient, reconnect code, ensure that subscribe is handled correctly
+Rewrite mqtt subscribe code, create high level handler, use subscribe callback to signal higher level code
+Fix for rainfall.h using deprecated rtc code. Add requirement check for RTC dependancy
+Fix error in define of init_msg_print (mydefines.h)
+Fix error in calculation of cntlr_config.jsn file (mysetupdata.cpp)
+Fix error in firmware call (37) and (38) setting gain and time for TSL2591 sensor
+Fix compilation error for BME280 sensor 'FOUNDSTR' was not declared 
+
+127-04
+Add cold and warm start to GPS
+Add name tags for Wind speed and direction device types
+Add mDNS name as controller setting on /admin1 (change without reprogramming)
+Add Fix type to GPS (/g1 and /admin2)
+Clean up init code for all sensors
+
+127-03
+Rewrite gps code to use polled NMEA message types
+Integrate gps code into task timer
+Add error_msg and init_msg types to all sensors and devices (see mydefines.h)
+Fix for some windspeed/winddirection sensors not starting correctly (due to error in setup of tasktimer) 
+
+127-02
+Change gps altitude to float (but will report as type int to Windows/Linux applications)
+Change admin page layout - rename options as gps and move options to another page
+Add isDST, isEnabled, Altitude, Satellites to /admin2 page for GPS
+Move LocalDateTimeSource to options /admin3 pg
+Remove reference to EMULATESQMMETER
+Fix isDST on /admin5 showing wrong state when NTP is not enabled
+Fix ntp timezone reference /admin6
+Fix for windchill factor not returning an error if temp/windspeed exceed limits (Paul)
+Fix for incorrect month shown in GPS code related to local time (Paul)
+Fix error in setup() handling return val from init_ntpclient()
+Fix tempbuff error in main file when using subscribe for mqtt
+Fix error for gps date/time in usermqttcode.h
+Fix error in rtc date/time in usermqttcode.h
+Fix for local date time source reverting to RTC
+Fix for GPS altitude using incorrect value
+Fix error in mqtt subscribe topic showing null value
+
+126-05
+Major rewrite of GPS code
+Add error logging to serial port
+Fix for /admin5 iSDST not displaying correct state (order is NTP, then GPS, not applicable to RTC)
+Fix for /admin2, GPS UTC/LOC date-time not showing
+Fix error in rtc.h set_rtc_date_time, t_loc not declared
+Fix error in mqttclient.h for rtc date/time
+Fix error in displays.h pg9, for rtc date/time
+
+126-04
+Add GPS UTC/LOC Date/Time fields to /admin2 web page
+Fix for GPS code
+
+126-03
+Add isDST to NTP web page, gives indication if current date time is in the DST
+Complete code for GPS UTC and LOC time
+
+126-02
+Fix for NZ_PTR string not showing if NTP was not enabled
+Fix issue of sync rtc to ntp when rtc is set to ESP32
+Fix issue of Date/Time fields on /admin8 not showing when using ESP32RTC in Accesspoint mode
+Fix issue of Date/Time fields on /admin8 not showing when using ESP32RTC in Stationpoint mode and NTP is disabled
+Fix issue of Date/Time fields on /admin8 showing garbage when using ESP32RTC in Stationpoint mode and NTP is disabled
+Fix issue of ntpclient() returning sucess when parts of that code fail
+Add controllermode, rtcds1307found, rtcesp32found
+Rewrite rtc code and some ntp code
+    setup/init of rtc
+    add checks around set
+    improve code error checks
+Move debug info into pages
+Create defines for ACCESSPOINTMODE and STATIONPOINTMODE (mydefines.h) 
+Add CONTROLLERMODE setting for ACCESSPOINT AND STATIONMODE (controllerconfig.h)
+Create mysqmplusmode, set value to CONTROLLERMODE (mysqmplus-126-02.ino)
+Import mysqmplusmode into files that need to determine controller mode
+Change init_ntpclient() to return int values which indicate what step failed
+Change function calls parameters in rtc.h (most were unnecessary)
+Update ntp, rtc, comms and webserver code when handling local time (rtc_loc)
+/admin5 ntp code
+   Update webserver code
+/admin8 rtc code
+   Add DATE TIME
+   Display date/time fields using  2 digits, leading 0
+   Fix layout error of NTP Update Interval (min) 
+   Update webserver code
+/admin11
+   Improve code in /admin11 /display.h webserver.h for detecting controller mode
+
+126-01
+Move debug definitions into each page
+Fix for bme280altitude compiler error when BME280SENSOR was defined
+Fix for bme280altitude not being remembered following a restart/reboot
+Fix for System Up Time not showing on some admin pages
+
+126-00
+Add Paul's code for NTP/RTC/GPS
+Add ntp_last_update which hold time of last ntp update, /admin5
+Add ntp_last_update to UpdateNTP(), in State_NTP_update
+Add ntp_last_update to /admin5 v125-68 
+Fix incorrect logging messages in ntp.h
+Fix for calculation of wind chill factor provided by Paul, 09-Jan-2022
+
+125-67
+Add ntp update interval, value stored in mySetupData, changed via /admin5, 15m to 180m (3hr)
+Add updating of ntp to task timer, expand machine_state in loop() to check ntp_update
+Add Paul's NTP code
+
+125-66
+Add sensorID check for bme280 sensor
+Add gps utc to gps loc date-time based on value of timezone values
+Fix for error in calculation of rainfall (rainfall.h)
+
+125-65
+Add file download to web server
+Add additional information to /admin11 web page
+Change button text descriptors on all /admin pages to reflect what they control
+Change mqttuser code to match recent changes in main mqtt code
+Rewrite gps code related to generation and use of gps_utc and gps_loc and date-time strings (gps.h)
+Rewrite rtc code related to generation and use of rtc_loc, rtc_loc_date and rtc_loc_time (rtc.h)
+Rewrite ntp code related to generation and use of ntp_utc and ntp_loc and date-time strings (ntp.h) 
+Rewrites triggered code changes in comms.h, displays.h, mqtt.h, usermqtt.h, webserver.h)
+Fix error get gpsdate and getgpstime in comms.h (returning rtc values instead of gps values)
+Fix error in publish MQTT, time was not updating
+Fix error for DF-ROBOT anenometer (incorrect spelling DFROBOTMULTIPLIERV3V)
+Fix error TSL2591 debug not working
+Fix error duplicate code for RTC in /admin11
+Fix error for some sensors not showing "disabled in firmware" in /admin11
+Fix error nelm not loaded on home page after a controller reboot
+
+125-64
+Deprecated LOCALSERIAL
+Deprecated SQMSUPPORT
+Deprecated EMULATESQMMETER
+Remove BME280ALTITUDE
+Remove espqueue.h (no longer needed)
+Change rtcpresent to rtcfound (now consistent usage for all sensors)
+Change json name in web-server home page to bme280alt (was bme280altitude)
+Change reserved page sizes in webserver.h and mqttclient.h due to additional values
+Add bme280alt as an estimated altitude calculated based on presure reading
+Add RTC to list of services in /admin11
+Fix admin header number on /admin11
+Fix for %HSL% on index.html page
+Fix for firmware version, heap and system uptime not showing on /admin11
+
+
+125-63
+Add conversion to sea level pressure for BME280 sensor
+
+
+125-62
+Fix for compiler error when EXTERNALRAINFALL is enabled
+
+
+125-61
+Fix error in comms.h related to set RTC date time
+
+
+125-60
+Add avgwindspd and maxgustwindspd to /rd and /w1 json calls
+Add avgwindspd and maxgustwindspd to webserver home page
+Add avgwindspd and maxgustwindspd to TCP/IP interface
+Add max wind gust and average windspeed calculations to code for voltage wind speed sensors
+Add /wa and /wm XHTML calls so values can be dynamically loaded on home page
+Remove defines that are not referenced
+Remove all TRACE code, when executed, causes long delays
+Fix for rain sensor using wrong timer flag
+Fix for trailing " in /ntp JSON call
+Fix for init_struct() to set weekday to monday (jan 1 1990 was a monday)
+Fix error RtcPrinttln , line 465 rtc.h
+Fix error in calculation of averagewindspeed 30s for wind speed sensors
+Fix gps message error when nmea message was successfully decoded
+Fix error in display.h preventing display from showing pages
+
+
+125-59
+Changes to NTP gettimezonestring() to allow running even if ntp is not enabled
+Changes to NTP code logic, and to the setting of ntp flags
+Fix errors in wrong flags being used for wind direction and wind speed timers
+Fix for display code not refreshing
+Fix for Weather Underground starting when not enabled
+Fix for external rainfall not refreshing
+Fix for sync-rtc-to-tmp time interval shown in seconds and not minutes
+Fix for /admin8 LocalDateTime value not updating correctly when timezone is changed
+Fix print error in mqttclient.h
+Fix for comms.h call to set new timezone not updating ntpclient
+
+
+125-58
+Add ESP32RTC as alternative to ds1307 rtc
+Add ntp code to handle scanning of tz.h file for the users timezone setting
+Add TZ file for Time Zones (see controllerconfig.h) Section 14: NTP
+Add rtctontp sync interval (comms.h and /admin5)
+Add timezone string (myntp.h) and text input on /admin5 (webserver.h)
+Add debug defines for RTC, RAINFALL, RAINBUCKET
+Add k1-k7 input fields to /admin4 so cloud model parameters can be changed
+Add check for null arguments when set value is used (comms.h)
+Add ability to change TimeZone whilst running, no reboot required
+Add reconnect to ntp, will automatically attempt reconnection every 60s
+Add mylocaldatetime - select source on /admin8 page (gps, ntp, rtc)
+Add mylocaldatetime - /date json call
+Add mylocaldatetime - contructed in each gps/ntp/rtc code for generating date/time
+Delete ntpsynchr, timezone hour and time zone minutes (comms.h and /admin5)
+Delete ntpsynchr, timezone hour and time zone minutes (display.h)
+Delete obsolete reference to raintime (rainfall.h)
+Change task_timer code
+Change comms.h code
+Change webserver,h code
+Change mysqmplus***.ino code
+Change mqtt code, kept reconnecting, publish intervals not consistent
+Change usermqtt code to integrate with changed mqttclient,h code
+Change /ntp json call to return time zone info
+Change /admin5 layout, add timezone info
+Change /admin5 handler to restart ntp when timezone is changed
+Change admin page 2 layout /admin2 
+Change rainfall.h to use get_rtc_date_time() instead of get_rtc1307()
+Change rainbucket.h to use get_rtc_date_time() instead of get_rtc1307()
+Change rainbucket.h to use rtc_loc in place of local vars rtc_minute, hour etc
+Change to initialization of RTC in setup()
+Change /ntp json call to add time-zone-string (webserver.h)
+Change /rd /w1 json calls to return windspeed/cloudcover/rainfalls 2 decimal places
+Change /d1 json call to return cloudcover as 2 decimal places
+Change xhtml calls to return skyambient/skyobject/cloudcover 2 decimal places
+Change MDNSSERVER to ENABLEMDNS
+Move ntp server to /admin5 from /admin1
+Move tz.h to /data sketch folder
+Generate time zone on controller boot by parsing tz.h
+Rename ntpserver as ntpclient
+Fix for tasktimer - some tasks not running on time
+Fix for sending SQM value immediately after a Get NTP time zone string
+Fix for timeout error getting date and time when RTC is not defined
+Fix for init_ntpclient(0 being called twice (webserver.h)
+Fix for calcwindchillfactor in not returning an invalid reading
+Fix for rainbucket and external rainfall (using wrong counters)
+Fix for external rainfall counter not being set correctly (rainfall.h)
+Fix for rainbucket counter not being set correctly (rainbucket.h)
+Fix for set RTC in comms.h (case :94# )
+Fix for oled not showing time zone offset in minutes
+Fix for ntp query time using wrong interval time in mytasktimer.h
+Fix for /list truncating file names in web server
+Fix for Cloud Model calculations in getskystate()
+Fix for mqtt publish topic not set correctly (comms.h) 
+Fix for set ntp time zone (comms.h)
+Fix for set RTC time (comms.h) - incorrect values
+Fix for error ntptime (display.h)
+Fix for RTC not working when using ESP32 Arduino Core 2.0.1
+Fix for SYNC RTC TO NTP not being restored correctly on a controller reboot
+Fix for MDNS state not displayed correctly on /admin11 web page
+Fix for convert_utc_to_local_time not handling month correctly
+Fix for compilation error for RTCDS1307
+Fix for Compilation error: updatewindspeed not found
+Fix for Compilation error: controllerconfig.h:486:2: error: invalid preprocessing #halt
+Fix for Compilation error: myespnow undefined reference
+Fix for rtc values not initialised when ENABLERTC is not enabled
+
+
+125-0
+Add myElegantOTA (provided by Paul)
+Move RTC code to myrtc.h [change required for ease of adding different RTC methods later]
+Change web-home page in JSON to include controllertype 
+Fix error in mytasktimer when using Rain Bucket
+Fix error in main ino file when using Rain Bucket
+Fix error in webserver when building home page as JSON string
+Fix Set RTC on /admin8 page returning wrong page /admin7 page
+
+
+124-4
+Fix for Daylight saving values /admin5 not being displayed/saved correctly
+Changes to /admin2 web page, layout and readibility improved
+Changes to /admin7 web page, layout and readibility improved
+Changes to /admin10 web page,layout and readibility improved
+Add comms calls so the Windows app can stop and restart the web service
+
+
+124-3
+Fix for external rainfall not updating rainfall values when enabled
+Fix flag issue of update_mqttcheck_flag not correctly initialized
+Fix issue of task intervals for assigned tasks varying in occurence
+Fix issue of unterminated #ifndef in rainfall_h
+Change rain updates from 15s to 6.1s
+Change rainbucket updates from 2.3s to 9.7s
+Add Mutexes around volatile update flags used by task timer
+
+
+124-2
+Add ElegantOTA as additional option for OTA (works in Accesspoint or Stationmode)
+
+
+124-1
+fix for brokeripchanged compiler link error
+
+
+124-0
+Switch to using library PubSubClient instead of myPubSubClient
+You need to download it and install it
+Nick O'Leary, https://github.com/knolleary/pubsubclient
+
+Add task timer to handle updates for all sensors and services
+Add MQTT publish interval to /admin6, and add handler for updating publish interval 
+ in SPIFFS file cntlr_config.jsn
+Add MQTT publish interval when saving controller config in cntlr_config.jsn
+Add TCP/IP call (comms.h) to get and set MQTT Publish Interval
+Add new admin pg7 to handle selection of data elements to send using MQTT
+Add new code handler for admin pg7 to set/clear user selected MQTT data elements
+Add example of receiving commands via MQTT
+Add support for home page user configuration code to mySetupData (save/restore)
+Add new admin pg10 for setting what data elements appear on home page of web-server 
+Add code to build the home page that applies user configuration selections, both as 
+  an HTML document or as a JSON formatted response when FORMAT HOME PAGE AS JSON is 
+  enabled in the admin server
+Add new admin pg11 (System Information)
+Add checks to trap if EXTERNALRAINFALL and RAINBUCKET are both enabled
+Add addition information about when to use ENABLEJSONSUPPORT
+Add protocol calls for get and set static gps coordinates
+Add synchronize RBG to RTC option on admin pg2
+
+Remove colorpicker page
+Remove global vars packetsreceived, packetssent
+Remove global vars ws_kph, ws_mph, ws_mps;
+Remove obsolete, un-referenced strings in mydefines.h
+Remove SHOWSTARTSCREEN and use a Bootup message on the display
+Remove update timer tests and sensor tests from all sensor, display, calc routines
+Remove old data comma separated stuff from MQTT etc
+Remove MQTT JSON, because JSON is now default
+Remove MQTT JSON call in /admin6.html
+Remove WINDCHILLFACTOR from controllerconfig.h because this is now the default
+Remove GPSFORMAT (decimal not supported at this)
+
+Change all sensors/services to use new task timer
+Change loop() to work with the new task timer
+Change admin page layout and formatting (all pages)
+Change footers of all admin server pages to link in new /admin7 MQTT option page
+Change MQTT init, connect, reconnect code to allow retries when Broker IP is changed 
+Change the /mqtt URI call to include MQTT Publish Interval time in the JSON response
+Change the MQTT publish code to use the selected data elements enabled on /admin7
+Change display code for MQTT status information
+Change MQTT publish code, publish topic is sent in JSON, a few key names have changed
+Change key names in usermqttcode.h for MQTT JSON messages to conform to naming conventions
+Change loop() code to test for sensor/update-time-elapsed before calling sensor code
+Change skystate() so code runs if MLX sensor not fitted (values can come from another device)
+Change SPIFFS test code for each web page, replaced by filesystemloaded flag
+Change Weather Underground code (improve cloud values)
+Rename RAINFALL define to EXTERNALRAINFALL
+Rename /data/admin7-admin8 as /data/admin8-admin9
+Rename JSON SUPPORT as HOME PAGE FORMAT /admin2 page
+Rename SQMSUPPORT as EMULATESQMMETER controllerconfig.h
+
+Move enablejsonsupport code to the file mysqmsupport.h
+
+Fix for static/truncate/format issues related to GPS coordinates
+Fix for makehay value not refreshing on web home page
+Fix for SUT (system uptime) not displaying correctly on some /admin pages
+Fix for page display time re-setting to 10s
+Fix for MQTT showing disabled in parts of web server
+
+
+123-3
+make some hay for Paul
+Change mqtt message format to use same variable order as logfiles for applications
+
+
+123-2
+Move static gps from controllerconfig.h into admin server /admin2
+Fixes for truncate gps code not working correctly for negative latitudes
+Add static gps state to OLED display page 2
+Add static gps state to spiffs file data_per.jsn
+Add enable/disable static gps to /admin2 web page
+Add enable/disable static gps to comms routines
+Add enable/disable truncate gps to comms routines
+Add get/set gps output format to comms routines
+Rewrite /g1 json code for gps values
+Rewrite mqtt (and user mqtt) publish code to send correct gps settings
+Write new rules that handle gps truncation and static gps values
+Write new rules that handle gps conversions between degrees and decimal notation
+Rewrite comms code to apply new rules to getting gps co-ordinates
+Rewrite webserver admin code to apply new rules for gps co-ordinates
+
+
+122-5
+Fix for rain bucket gauge (rainbucket.h)
+Fix for Rainfall day not updating on main web page (fix in inclxhtml.js file)
+
+
+122-4
+Add system uptime to root web page, update via XHTML 
+
+
+122-3
+Fix for XHTML scripts (rv, rd, rh)
+Fix for incorrect code in RainBucket.h
+Move TLSCORRECTIONFACTOR into SPIFFS
+Add change at runtime for TLSCorrectionFactor via JSON or web server (pg2)
+Add comms TCP/IP calls 25/26 to handle TLSCorrectionFactor
+Do not forget to upload the Sketch data files after programming the controller
+
+
+122-2
+Fix for reboots when using OLED display
+
+
+122-1
+For for windspeed sensor Anemon4403 (Carlos: windspeed.h)
+Fix for error in update test for Wind Speed Sensor (astrofrank: windspeed.h)
+Change to mqtt reconnect - code is meant to wait an elapsed time before a reconnect attempt
+
+
+122
+Fix for MQTT Debug errors
+Fix for cloud flag percent, temp clear and temp overcast on admin4 web page
+Fix for webserver XHTML request /wc for WindChill factor to handle invalid calculations
+Remove handler for POST events to root (index.html) web server page (no longer required)
+Fix for case 59: comms
+
+
+121-4
+Change some configuration checks in controllerconfig.h
+Change index web-page about raining status to match xhtml code
+Fix for xhtml script to use correct syntax for refreshing values on home web-page
+
+
+121-3
+Fix for serial and other connection issues [invalid mqtt broker ip]
+
+
+121-2
+Add code check when calculating wind chill factor, if invalid, return -1
+Fix: should not be able to set Sync RTC to NTP if (NTP AND RTC) is not defined (on /admin1 pg)
+
+
+121-1
+Add system up-time
+Fix /g1 error in json string (gps format was not changing)
+
+121-0
+Add mDNS
+Rewrite portions of OTA code
+
+
+120-b12
+Checked RTC issue (cannot upload if RTC is fitted and enabled)
+Checked OTA update issue (could not use OTA updates)
+
+
+120-b11
+Fix for Wind speed not working when rain bucket is enabled (rainbucket.h)
+
+
+120-b9
+Fix for duplicate get time zone calls in comms.h
+Fix for /mqtt error
+
+
+120-b8
+Fix for dls and tz information not being read correctly after a power cycle or reboot
+
+
+120-
+Make sure to upgrade the library arduinojsn to the latest version v6.18.0 or higher
+Changes to controllerconfig layout
+Add new defines (mydefines.h) for Wind Speed, Wind Direction and RainBucketGauge sensors
+Overhall definitions of Wind Speed, Wind Direction and RainBucketGauge sensors (focuserconfig.h)
+Remove Admin server page6 for modifying TSL2591 sensor settings
+Add new admin page 6 to handle MQTT
+Move MQTT from admin1 to new admin MQTT page 6
+Add MQTT broker subscription code
+Add calls (comms.h) to Set and Get the MQTT subscribe topic
+Expand /mqtt JSON call to include subscribe and publish topics
+Add targeted debugging
+Move MQTT and OTA updates into Main State Engine
+Fix for alternative credentials being set incorrectly
+Rewrite Client code for multiple connections
+
+
+119-8
+Fix for Wind Direction Sensor Sparkfun (R4-1K, R5=2K, using 5k Pullup from SIG to 5V)
+Fix for Wind Speed Sensor Sparkfun (R3=100k pulldown resistor from SIG to GND)
+
+
+119-7
+Fix for Wind Direction Sensor WINDDIRECTIONLIYUAN
+
+
+119-6
+Fix compile time checks (controllerconfig.h)
+Changes to NTP - a request is sent immediately if NTP is enabled AND the controller
+has just rebooted else NTP requests are sent according to the set interval
+
+
+119-5
+Remove serial print from mydisplays.h causing issues with LOCALSERIAL
+Remove oledscrolling due to bug in Library
+Fix for Boltwood/CSII file [cloudcover, 0=clear, 1=cloudy, 2=very cloudy)
+
+
+119-4
+Fixes for OLED_TEXT (was broken by new code inserted into 119)
+
+
+119-3
+Fixes for LOCALSERIAL
+
+
+119-2
+Fix for rtc month check (as reported by Paul H)
+
+
+119-1
+Fix for oledscrolling compilation error (mydisplays.h)
+
+
+119-0
+Fix for SERIALMODE (mySQMPLUS-119-0.ino, controllerconfig.h)
+Fix to support ArduinoJson library 16.8.0 (mySQMSetupData.cpp)
+Fix in mydisplay.h OLED code to obey controller definitions/modes (mydisplay.h)
+Fix OLED issues when OLEDTEXT not defined (mydisplay.h)
+Add ability to use OLED as debug output when initializing controller (mySQMPLUS-119-0.ino)
+
+
+118
+Fix for OLED Text display not restarting if enabled prior to reboot
+Fix for errors when DEBUG is defined
+
+
+117
+Changes to management web pages
+Add warning message to reboot() from webserver admin pages
+
+
+116
+Add skystate to MQTT
+
+115
+Fix for sending JSON to MQTT [identified by Franck]
+
+
+114
+Fix for error when mqtt enabled
+
+
+113 
+Add additional comms and webserver calls
+
+
+112
+Fix for RTC calculation of month in webserver routines
+
+
+111
+Fix for small font showing on mobile devices like phones/tablets
+
+
+110
+Fix usermqtt compilation errors [topic_str undefined]
+Fix rainbucket gauge compilation error [extern references required for get_rtc1307]
+Create defines for web page colors and modify mySetupData.cpp to use these as defaults
+
+
+109
+Changes for '!' not showing properly on USESSH1106 oled display
+
+
+108
+Set NTP default server to pool.ntp.org
+Check MQTT server IP for valid format otherwise set to 0.0.0.0
+Fix for MQTT server IP address not saved in data_per.jsn
+Reduce MQTT connection attempts from 5 to 2 in mqttconnecttobroker() to reduce wait times if no response from broker ip
+Add comms calls to comms.h for set mqtt broker IP, get MQTT broker IP and set NTP server name
+Add JSON call to webserver for /mqtt which returns mqtt info
+Display MQTT Broker IP on /admin1 page to allow changes even when MQTT is not enabled
+After reprogramming
+when starting up,
+	mySetupData sets mqttbrokerip to that defined in controllerconfig.h section 11
+	mySetupData sets ntpservernamer to that defined in controllerconfig.h section 15
+then in setup()
+	mqtt_broker_ip in controllerconfig is checked for validity
+	if mqtt_broker_ip not valid format [like 192.278.2.1] then is set to 0.0.0.0
+
+
+107
+Fix for MQTT server IP address check after loading new firmware
+
+
+106
+Fix for SQMSUPPORT compilation errors
+Fix for rainbucketgauge_sync_rtc error
+
+
+105
+Make XHTML support permanent
+Fix bug in CROSSDOMAIN not working at times - now moved to ADMIN server
+
+
+104
+Fix for RainRate on OLED display [mydisplay.h]
+Fix for page display time not changing [webserver.h]
+
+
+103
+Change in way in which AP mode is started
+Fix issue with MQTT JSON strings [mqttserver.h and usermqttcode.h]
+add /gps as JSON call to webserver to return GPS data [can also use /g1]
+add ntpservername to /ntp call to webserver
+
+
+102c
+Fix for sky cloud model formula
+Add bme280e library for 16x sampling of temperature/humidity for bme280 sensor [better accuracy]
+Add dailyrainin to Weather Underground upload
+Some names for JSON/MQTT have changed - there is now consistent usage across all options: PDF 102c pg84
+Change bme280 and mlx90614 sensor readings under timer control to spread load on controller
+Change windspeed and winddirection sensor readings under timer control to spread load on controller
+
+
+102b
+Fix for Weather underground compilation error for rainfall
+Fix for compilation error in comms.h case 82: when rainbucketgauge is not defined but rtc is
+
+
+102a
+Add support for Anemometer Weather Meters Kit by Sparkfun Electronics SEN-08942
+[Pulse sensor Output Anemometer] Weather Sensor Assembly 80422 by Argent Data Systems
+[Rain Bucket Gauge] Weather Sensor Assembly 80422 by Argent Data Systems
+[Wind Direction Sensor] Weather Sensor Assembly 80422 by Argent Data Systems
+Add support for Misol weather station components [spare parts MS-WH-SP-RG, WH-SP-WS01 and WH-SP-WD]
+Fix for wind speed calculation using ANEMOMETER3DPRINT/ANEMOMETER4403/ANEMOMETER80422
+Fix for Liyuan wind direction sensor
+Fix for return rain voltage
+Add call for Get Rain Bucket Gauge [also to webserver and serial/tcp/ip calls)
+- Get cumulative rainfall for this current day
+- Get cumulative rainfall for this current hour
+- Get rain total in mm over previous hour
+Add rainfall (cummulative hour and cummulative day) to web server pages and json requests
+Add rainfall to MQTT, Weather underground and OLED display
+Add sync ability via webserver or serial/tcp/ip call for Rain Bucket Gauge min/hr to Real Time Clock
+Rewrite Rainfall.h for consistency usage with Rain Bucket Gauge
+
+
+101
+Fix for oled display showing 2x size on other pages other than page 1
+
+
+100
+Fix for oled display pg2 [GPS] and pg5 [HUMIDITY/AMBIENT/DEWPOINT/PRESSURE/SKY-A/SKY-O/WINDC/F]
+Optimize web server code
+Change order of oled page 2 to display lat/lon/alt/sat/fix
+
+
+99
+Fix for /admin3 to display oled pagetime and pageoption even if oledtext not defined
+Fix for formatting /admin3 and /admin5
+Add /about as JSON request to return version etc
+Add /reboottcp as JSON request to restart TCP/IP interface
+Updates for DAUGHTER BOARD myESP32DB folder examples and pdf
+Fix for handling CFP, TC and TOC on /admin4
+Fix for BrokerIP, TCP/IP port, NTPServerName on /admin
+Fix JSON /g1 request to return 01/01/1900 if no GPS defined
+Fix for /admin7 showing invalid chars after YEAR value
+Change text /admin of NTP SYNC TIME to NTP QUERY TIME [it is not really a sync]
+Optimize case 8, 9, 72, 74, 75
+
+
+98
+Fix for ANEMOMETER3DPRINT and ANEMOMETER4403 not showing windspeed
+Add /rebootws to enable restarting of web server
+Add /reboot to enable rebooting of controller
+Remove GPZDA - this is not supported by NEO-6M GPS sensors
+Comment out Serial.print statements in rainfall.h
+Fix array bounds issue in convert_utc_to_local_time()
+Reduce scope of local vars in getlux()
+Fix %BFS% on root web page
+Fix date showing as 00/00/1900 in TCP/IP and USB apps - changed to 01/01/1900 
+
+
+97
+Add GPZDA NMEA message parsing
+Fix for GPS init() code, incorrect PMK314 initialisation string
+Replace string constants in code with defines [CHARCOMMA, CHARDOT, CHARSPACE etc]
+Replace webpage not found string with common string constant when assembling webpages
+Changes to webpages to ensure smaller size and add reboot button on admin5 [was missing]
+Changes to webserver handling of webpages to match changes to webpages
+Rename colorpicker.html to cp.html
+Change admin button SPIFFS FILES to LIST FILES
+Add NTP hour during which the sync of RTC will occur
+Add rainfall code into rainfall.h
+Remove DOW from RTC page /admin7 and add code to calculate this automatically
+
+
+96
+Fix for OLED page option not being applied
+Fix for Beaufort Scale not being updated in XHTML
+Fix for OLED page 3, LOC date for GPS not showing
+Fix for Webserver / page not showing GPS date correctly
+Fix for crash if OLEDTEXT defined and no OLED display found
+Remove Beaufort scale from Windspeed line on / web-page as it has its own line now
+
+
+95
+Fix bug in OLED page option not being saved
+Add error check on /admin3 for OLED Page Group Option
+Fix RTC values not showing on /admin7 page
+
+
+94
+Fix for xhtml pages to correctly show values according to temperature and distance modes
+Remove webpagerefreshrate [redundant]
+Revise admin pages [now 1-8]
+Group all oled options and group on new /admin3
+Add oled page options, remembered in SPIFFS, option on /admin3
+Add oled page display time option to /admin3 [2000-10000], Default = 4500 milliseconds
+Add case 78 and 79 for get/set oled page option
+Move initialisation of webserver pages to machine state idle
+Use common function for checking server reboot from /adminx pages
+
+
+93
+Fix for Windspeed Unit and Scale disappearing from web page when using xhtml
+Fix for 'gpa_loc' was not declared when GPS is defined
+Change RTC to use struct tm
+Change RTC set_date_time_rtc1307 to use struct tm type
+Change to WEBSERVER_handleadmin6() to use struct tm type for updating RTC date/time
+Change get_ntpserver_message() to use struct tm type in syncing RTC date/time to NTP
+Use common function to initialize struct tm types for NTP/GPS/RTC
+
+
+92
+Fix sync of RTC to NTP
+Fix windchill factor not reporting as JSON string on root page [when JSON enabled]
+Add Beaufort Scale to home page
+Add XHTML support for Beaufort Scale
+Fix wind direction and wind chill factor disappearing from root page when XHTML enabled
+
+
+91
+Combine RTC/NTP/GPS code into common routines to handle local date
+Update MQTT and webserver code in relation to local time
+Add case 77: Get NTP servername
+Rewrite web server code related to sending pages
+Fix for XTML not working
+
+
+90
+Implement NTP
+Add sysnc RTC with NTP data
+Rename mqttserver to mqttclient
+Add code to restart mqttclient correctly if client exits
+Add extra controller data to MQTT publish [MAC, RTC, WindChillFactor]
+Fix compile errors in usermqtt file
+Update usermqtt file to add MAC, RTC, WindChillFactor
+Add JSON request /mac to get Controller MAC address
+Add JSON request /ntp to get Controller ntp date/time [utc, tz and loc time/dates]
+Add case 71: to protocol to return MAC address
+Add case 72: to protocol to return RTC date time as string
+Add case 73: to protocol to return Wind Chill Factor
+Add case 74: to protocol to return NTP UTC date time as string
+Add case 75: to protocol to return NTP LOC [UTC adj by TZ] date time as string
+Add case 76: to protocol to return TZ [hh:mm] as string
+Add tests for timing code
+Rearrange /admin pages to improve page load times, now up to /admin7
+Appy fix for WiFi connection, faster connection now possible
+Extract add a cross origin header into function call
+Add NTP time to oled page 9 [also displays RTC and TimeZone]
+Minor Bug Fixes
+
+
+89
+Internal use only, not released
+
+
+88 
+Minor compilation error bug fixes
+Implement TimedTests for debugging issues
+Extract strings to defines for oled/mqtt/display/gps/mySQMSetupData etc
+Move myPubSubClient files to new library [please install in Arduino]
+
+
+87
+Minor Fixes
+Add check for RTC year value, ensure it is in format 20-99
+Change footers for each web-page to ensure consistency in page presentation
+Add JSON request /rtc to get RTC values from RTC [if enabled]
+
+
+86
+Bug fix for link on admin3 page missing the closing quotes for /admin3
+Bug fix for undeclared variable 'beaufordscale' in mydisplay.h
+Bug fix for anemometer3dprint_read() not found when using WINDSPEEDSENSOR and ANEMOMETER4403
+Bug fix for RTC issues
+Bug Fix for webserver /delete page
+Add immediate save of controller data to SPIFFS before a reboot happens
+Add ability to change webpage colors to /admin3
+Add colorpicker 
+
+
+85
+Remove Gain and Integration time from data_per.jsn SPIFFS file
+Add Beaufort scale to MQTT publish
+Add Beaufort scale to json request for / page
+
+
+84
+Fix error in saving data_per.json to SPIFFS
+
+
+83
+Add Beaufort Scale [0-12] for Windspeed and /wd
+Small change to kickstart code
+
+
+82 
+Move strings to defines and use F()
+Restore bootup oled messages that were removed in v81
+Implement kickstart for getlux()
+
+
+81
+Fix mqtt unresolved errors due to changes in v80
+Remove RUNNINGAVERAGE and LUXSAMPLES
+Extract oled routines to new file mydisplay.h
+Extract gps routines to new file mygps.h
+
+
+80
+Major rewrite of getlux()
+
+
+79
+Remove redundant variables from getlux()
+Add code to handle overflow in getlux()
+
+
+78
+Rewrite getlux() to use timer and insert into main state engine
+Rewrite getlux() to check for nan and inf and use boundary checks for lux
+Correct error in calculating averagedlux
+
+
+77
+revert to v68 code for lux measurement
+
+
+76
+Implement auto-gain level adjustment using two levels
+
+
+75
+Add improvements to auto adjustment of TSL2591 Sensor
+
+
+74
+Add 200MS and 400MS to TSL2591 Integration time and webpage /admin2
+
+
+73
+Fix bug in auto gain algorithm
+
+
+72
+Power off TSL2591 sensor when changing gain - as per application note
+Implement auto gain algorithm as per application note
+Handle error caused by TSL2591 sensor register overflow
+NOTE: Requires the updated myAsyncTSL2591 library - you must replace the old one
+
+
+71
+Fix for admin page 2 web server for TSL2591 Gain/Intgeration Times MAX settings
+
+
+70
+Fix for SQM/Lux/NELM showing as Nan on OLED and webpage [but not in windows app]
+
+69
+Name change to mySQM+, update all web pages and network information
+Slight change to Lux checks for TSL2591 sensor
+
+68
+Fix getwinddir bug
+Rewrite oled and webpage routines to display all values instead of "not enabled in firmware"
+Rewrite controllerconfig layout and tests for defined options
+Add code for wind chill which will be added in future releases
+Add code to handle future addition of rain bucket and rainfall
+Add code for Real Time Clock, I2C, DS1307, add admin3 page to handle RTC
+Encapsulate MQTT.cpp and .h file using #ifdef
+Fix GPS output format on Admin page
+
+67
+Fix multiplier for DF-ROBOT Anemometer using voltage range 0-3V3 with resistor divider
+Fix for 3DPRINT ANEMOMETER code
+Fix for Adafruit windspeed sensor code
+Change readwindspeed to return a double value, now consistent with readwinddirection
+Fix for Wind Direction using Analog wind direction sensor
+Add support for Weather Underground
+
+
+66
+Add OTA updating
+
+65
+Add JSON support for getting values from ESP32 Daughter board
+[Basic templates provided]
+Add folder myESP32 Daughter Board/FIRMWARE DAUGHTER BOARD V4
+Add folder Branch Remote Slave [for Daughter Board examples using ESPNOW and MQTT]
+
+64
+Add Wind Speed Anemon4403 Pulse Output
+Remove CSS to improve response
+espnow fixes
+
+63
+Move all configurations into controllerconfig.h
+Fix for xhtml Wind Direction
+
+62
+Change Pressure to double type
+Change bme280 library to bme280d - you will need to import this library
+Add ESPNOW support
+
+60
+Fix for DLS on admin page 2 - not setting state and changing to first admin page
+Add current state to each flag on admin page within []
+Fix error truncategps() not found in usermqttcode.h
+Fix usermqttcode.h not obeying truncategps and gps_format settings
+Fix bug in not sending N/S or E/W with gps-co-ordinates when gps is truncated or in decimal mode
+Fix OLED display not obeying truncate or gps_format rules
+Fix Web home page not obeying truncate or gps_format rules
+Fix for Day-Light-Saving [DLS] code
+
+59
+Make small change to mqttpublishtobroker()
+Add define for gps output as decimal or degrees, minutes, seconds - webserver admin-page setting
+gps as 28°30'23" N 13°52'41" W or 28.50638889 N 13.87805556 W
+Add Cloud Flag Percentage , Temperature Clear, Temperature Overcast settings to webserver admin-page
+Fix error when compiling for OLED
+Split admin server web-page in two pages
+Fix MQTT reconnection issue
+Fix mycustomjson.h to obey new crossmain using SPIFFS
+
+
+58
+Change GPS output to xx xx.xxxxx C , eg 28 32.4651 N
+
+57
+Improve gps parsing to include seconds into lat/lon string values
+GPS changes from "28.32 N" to 28.324651 N", and "18.30 W" to "18.301245 W"
+Note space between degrees and minues.seconds
+Change to webserver /g1, ensure latitude and longitude are truncated ir required
+Change to tcp/ip and serial return values for gps - no longer ned to check if gps enabled in firmware
+
+56
+Fix for mqtt_broker_ip not defined if ENABLEMQTT is not enabled
+
+55
+Create Section 2 in main firmware file for MQTT definitions
+Move definition of MQTT broker IP to main firmware file
+On startup after a reprogram, copy MQTT broker ip to SPIFFS
+If MQTT Broker IP changes in the future, use admin server web-page to enter new value
+
+54
+Relocate truncategps() calls to where it is actually required
+Rewrite OLED Screens
+Fix enable/disable OLED issue on admin server web-page
+
+53
+Bug fixes due to reformatting error in Arduino IDE
+Fixes for OLED pages, add mqtt connection state, mqqttjson and truncate gps states
+
+52
+Fix for truncmylongitude not found [should be trunclongitude] in webserver code
+Fix for lat/lon not being truncated[if TRUNCATEGPS enabled] in non-JSON code for mqttpublishtobroker()
+
+51
+Add option to truncate GPS co-ordinates when sending to MQTT Broker or via JSON and webserver requests [see admin server web-page]
+Fix for MQTT service not reconnecting if connection to MQTT Broker is lost
+Fix for gpsinit() not using definition GPSRXDPIN and GPSTXTPIN, was hard-coded before
+Add option MQTTADDUSERCODE to allow user to add their own MQTT definitions or MQTT publish code
+
+50
+Fix bug on webserver admin page when MQTT is not enabled in firmware
+Fig bug in not sending clientdescription when MQTT is enabled
+Fix bug in copying MQTT message payload
+Fix bug in not being able to send more than 200 chars in MQTT message payload
+Add JSON option for MQTT publish
+
+49
+Add mQTT support - see PDF for details
+
+48
+Changes to ANEMOMETER3DPRINT 
+Changes to WINDDIRECTION3DPRINT 
+
+47
+Add ANEMOMETER3DPRINT support
+Add WINDDIRECTION3DPRINT support
+Remove JEELabs anemometer support
+
+46
+Tidy up code from MIRA check
+Add CustomJSON file so user can write own json code for webserver requests: limit of customized function calls
+Fix for JEELabs Anemometer returing nan if enabled but not physically connected (now returns 0.0)
+
+45
+Ensure ENABLECROSSDOMAIN is used with WEBSERVER
+Fix not responding if using AS5600 sensor
+
+44
+Support for AS5600 Magnetic Direction Sensor
+
+43
+Fix for local date /day-light saving calculation 
+
+42
+Fix for oled cloudy and % text
+Fix for incorrect json string values for gps date/time
+Fix for /list on admin page json output
+Add reboot controller button to /admin page
+
+41
+Add cross domain request support
+
+40
+Typo fix for xhtml requests
+Fix for error in asynctsl2591 library
+
+39
+Fix for webserver admin page - setting integration time MED not working
+Make asynctsl2591 a library - make sure you copy this new library into documents/arduino/libraries
+Fix references in mySetupData.cpp to use new library
+Update README.md
+
+38
+Rewrite TSL2591 library to support Async read
+
+37
+Revert back to lux code from v35
+
+36
+convert sqm to double type to reduce rounding errors in conversions
+use volatile data type for lux and sqm
+use tsl2591 status to check if lux measurement is ready
+
+35
+Increase number of digits in lux readout
+
+34
+Fix dynamic XHTML request for skystate and return CLOUDY or CLEAR, not 1 or 0
+Fix error finding WEBSERVER_handlewindspeed()
+Fix error finding WEBSERVER_handlewinddirection()
+Fix error WEBSERVER_handlejw1() returning wrong values
+
+33
+move tslgain/integration time to /admin page of web server
+add cfp/tc/toc settings to /admin page of web server
+
+32 
+Adopt web page layout from Carlos, move cloudcover and skystate to Dark Sky area
+Disable refresh parameter on webpage
+Migrate webpage to use XMTL to update values
+Use inclxhtml.js file to handle xhtml updates
+If rainsensor is not defined, report as such on webpage
+If GPS not defined, report as such on webpage
+Add json support for apps to allow getting "Temperature", "Weather", "Darksky and "Gps" data
+
+
+31
+Fix raining issue in webserver home page
+Fix error in debug statements for Windsensor
+Add DF-Robot Anemometer
+Add DCMotor Anemometer from Aliexpress
+Use defines for proportional values when converting voltage to windspeed for anemometers
+
+30
+Fix for Adafruit Wind Speed Sensor
+
+29
+Add TLSCORRECTIONFACTOR to calculation of LUX to compensate for any filter/lens that might be used
+Ensure LUXSAMPLES is defined if using RUNNINGAVERAGE
+
+28
+Rewrite Anemometer code for wind speed
+Add JEELABS anemometer as option
+
+27
+Fix for localdate on web page being a long string
+Add cloud cover to 1st page OLED under SQM
+
+26
+If a new TCPIP connection request arrives and exceeds maximum. then close the client request
+Add OLED display enable/disable on /admin page
+Remove unnecessary defines
+Add additional debug statements
+Fix for timezone offset not being applied to local time
+Changes to Wind Direction - Also test program for wind direction
+
+25
+Allow up to 4 simultaneous TCP/IP connections
+
+24
+Implement Daylight savings and timezone on /admin page
+Implement local time derived from gps date/time
+Fix for sqmsupport and localserial
+Make Wind speed return m/s to conform to ASCOM standard, fix error in calculations
+Fix undefined error for daysofmonth if gps undefined
+
+023
+make JSON SUPPORT a configurable parameter which can be enabled/disabled on the /admin web page
+Fix for NMEA checksum
+
+022
+Fix for errors in Debug statements in setup()
+Fix calculation of sky model - should be using irambient
+
+021
+Fixes for sky model, add CFP, TC and TOC to model
+Fix k3 not being saved
+
+
+020
+Fix for GPS year from /20 to /2020
+Implement SkyModel (based on INDIDUINOMETEO: Nacho Mas
+Modifications to SkyModel by Paul Porters
+
+019
+Fixes for SQM value always reporting as 0
+
+018
+GPS now working
+
+017
+Add gps code
+sqm/nelm/ambient/dewpoint/irobject/irambient on lcd to 2 places
+lux now reported to 4 places
+
+016
+Add dynamic adjustment of gain and integration time for TSL2591 sensor
+Fix OLED refresh issue.
+
+015
+Add JSON support to webserver
+
+014 
+Add averaging of values over a number of samples to prevent rapid fluctuations
+
+013
+Add change TCP/IP port to webserver admin console
+
+012
+Add check for LOCALSERIAL if SQMSUPPORT is defined
+Only include GPS code if GPS in enabled in controllerconfig.h
+
+011
+Fix for persistant controller values not being saved to SPIFFS when changed
+
+010
+SQM Fixes
+
+009
+GPS fixes
+
+008
+Add hPa after pressure value on OLED and webpage
+Other small fixes
+
+007
+Add Wind Direction sensor
+Implement state machine to manage sensors
+Fix MLX90614 Object not displaying on webpage
+
+006
+Fix OLED display updates
+Add change tempmode and distancemode buttons to webserver /admin page
+Change way in which oled is updated
+
+005
+Fix OLED issues
+Numerous other fixes
+Add Adafruit Anenometer
+Add kph/mph
+Add change between celsius and fahrenheit, save as preference
+Add change between meters and feet [altitude], save as preference
+
+004
+Remove unneeded spaces in html files to reduce size of web pages
+Change NOT RAINING to NO RAIN
+
+003
+Fix for error if lux is 0
+Fix for incorrect SQM reading
+Adjust decimal places for temperatures, sqm and nelm
+Adjust number of decimal places for lux depending on range
+
+002
+Add STATIONMODE, ACCESSPOINT, STATICIP
+Add Controller mode to OLED Display
+Add TSL2591 Gain and Intergration time to Serial and Webserver
+Add firmware check
+Add reboot controller
+Add list SPIFF, upload file to SPIFFS to Webserver
+Add delete SPIFF file to Webserver
+Remove redundant code in processserial()
+Add /admin page to Webserver
+Not tested
+SQMSUPPORT
+GPS
+
+001
+Initial release
+Not tested
+SQMSUPPORT
+GPS

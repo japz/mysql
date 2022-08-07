@@ -1,0 +1,109 @@
+Admin Page 1 SERVERS
+TCP/IP Server Status [State] [Start | Stop]
+Port [Port] value [Set]
+
+WEB Server Status [State] [Start | Stop]
+Port [Port] value [Set]
+
+
+Admin Page 2 GPS
+GPS [State]
+Format [Option] [DD or DMS]
+Truncate GPS [State] [Enable | Disable]
+Static GPS [State] [Enable | Disable] 
+Static Latitude value [Set]
+Static Longitude value [Set]
+UTC Date/time
+LOC Date/Time
+isDST
+Altitude
+Satellites
+GGA: Fix Quality Indicator
+GGL: Fix Status
+GGL: Position Mode Indicator
+RMC: Mode Indicator
+GSA: Smode Indicator
+GSA: Nav Mode
+GPS Boot Mode: [Hot][Warm][Cold] [Set]
+
+
+Admin Page 3 OPTIONS
+Cross domain support [State] [Enable | Disable]
+Distance Unit [State] [Metric | Imperial]
+Home Page Format [State] [HTML | JSON]
+Temperature Unit [State] [Celsius | Fahrenheit]
+BME Altitude [value] value [Set]
+Local Date Time Source [GPS][RTC][NTP] [Set]
+Local Date Time value
+
+
+Admin Page4 [DISPLAY]
+OLED Display [State] [Enable | Disable]
+Page Display Option [value] value [Set]
+Page Time [value] value [Set]
+
+
+Admin Page 5 [CLOUD MODEL]
+Cloud Flag Percent value [Set]
+Temperature Overcast value [Set]
+Temperature Clear value [Set]
+K1-K7 value [Set]
+
+
+Admin Page 6 [NTP]
+NTP CLIENT
+NTP Server Name value [Set]
+Status
+NTP Update Interval (min) value [Set]
+NTP Time of last update
+TIMEZONE
+UTC time
+LOC time
+Time Zone value [Set]
+TZ String
+isDST
+SYNC RTC
+Sync RTC to NTP [State] [Enable | Disable]
+
+
+Admin Page 7 MQTT
+MQTT Service Status: [State] [START | STOP] Client State:
+Broker IP value [Set]
+MQTT Publish Topic value [Set]
+MQTT Subscribe Topic value [Set]
+MQTT Publish Interval value [Set]
+
+
+Admin Page 8 MQTT Logging Options
+[Disable all] [Enable all]
+
+
+Admin Page 9 RTC
+Source, Date, Time
+Day value, Month value, Year value
+Hour value, Minite value, Seconds value [Set]
+
+
+Admin Page 10 Web Page Colors
+Title Color value [Set]
+Bkgnd Color value [Set]
+Header Color value [Set]
+Text Color value [Set]
+
+
+Admin Page 11 Web Home page
+Configure options
+[Disable all] [Enable all]
+
+
+Admin Page 12 System Information
+ESP32 CHIP INFORMATION
+SENSOR STATUS
+DEVICES
+SERVICES
+
+
+TSL2591 [hidden]
+TLS Correction factor [value] value [Set]
+Average lux readings [value] value [Enable | Disable]
+Sample size [value] [Set]

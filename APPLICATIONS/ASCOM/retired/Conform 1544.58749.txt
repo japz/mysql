@@ -1,0 +1,253 @@
+Start-up ASCOM Device Conformance Checker - 64bit mode
+15:44:58.780 Start-up                          DEBUG    Initial application error level: ERRORMODE_SYSTEM_DEFAULT
+15:44:58.780 Start-up                          DEBUG    New application error level:     ERRORMODE_NO_WINDOWS_ERROR_DIALOGUES
+                                                    
+Start-up ASCOM Platform 6.4 SP1 6.4.1.2695
+ 
+15:44:58.796 Form.Load                         DEBUG    Found loaded assembly: mscorlib 4.0.0.0
+15:44:58.796 Form.Load                         DEBUG    Found loaded assembly: Conform 6.4.64.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: Microsoft.VisualBasic 10.0.0.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: System 4.0.0.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: System.Core 4.0.0.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: System.Windows.Forms 4.0.0.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: System.Drawing 4.0.0.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: System.Configuration 4.0.0.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: System.Xml 4.0.0.0
+15:44:58.812 Form.Load                         DEBUG    Found loaded assembly: System.Runtime.Remoting 4.0.0.0
+15:44:58.823 Form.Load                         DEBUG    Found loaded assembly: ASCOM.Utilities 6.0.0.0
+15:44:58.823                                   DEBUG    
+ 
+CheckForUpdates Checking for Conform updates with 10 second timeout
+15:44:58.828 CheckForUpdates                   INFO     This version of Conform is:           6.4.64.0
+15:44:58.843 CheckForUpdates                   DEBUG    Target URI: https://download.ascom-standards.org/devtools/conform.txt
+15:44:58.843 CheckForUpdates                   DEBUG    No proxy server detected, going directly to Internet
+15:44:58.843 CheckForUpdates                   DEBUG    Sending request to web server with 10 second timeout...
+15:44:59.565 CheckForUpdates                   ERROR    WebException: The request was aborted: Could not create SSL/TLS secure channel.
+ 
+15:45:10.937 SelectDriver                      DEBUG    Selected ProgID is: ASCOM.mySQMPLUSASCOM.ObservingConditions ObservingConditions
+ 
+Support information 
+15:45:13.228 Support                           INFO     OS version: Microsoft Windows NT 6.2.9200.0
+15:45:13.228 Support                           INFO     .NET version: 4.0.30319.42000
+15:45:13.244 Support                           INFO     Processor count: 12
+15:45:13.244 Support                           INFO     System directory: C:\WINDOWS\system32
+15:45:13.244 Support                           INFO     Program files directory: C:\Program Files
+15:45:13.244 Support                           INFO     Common program files directory: C:\Program Files\Common Files
+15:45:13.255 Support                           INFO     Common application data directory: C:\ProgramData
+15:45:13.255 Support                           INFO     Current directory: C:\Program Files (x86)\ASCOM\Conform
+15:45:13.260 Support                           INFO     Current culture: en-US
+15:45:13.260 Support                           INFO     Total physical memory: 34,200,240,128
+15:45:13.260 Support                           INFO     Total virtual memory: 140,737,488,224,256
+15:45:13.401 Support                           INFO     OS full name: Microsoft Windows 11 Pro
+15:45:13.401 Support                           INFO     Available physical memory: 26,398,171,136
+15:45:13.416 Support                           INFO     Available virtual memory: 140,732,394,278,912
+ 
+ 
+ 
+ConformanceCheck ASCOM Device Conformance Checker Version 6.4.64.0, Build time: 6/7/2019 2:06:44 PM
+ConformanceCheck Running on: ASCOM Platform 6.4 SP1 6.4.1.2695
+ 
+ConformanceCheck Driver ProgID: ASCOM.mySQMPLUSASCOM.ObservingConditions
+ 
+Error handling 
+Error number for "Not Implemented" is: 80040400
+Error number for "Invalid Value 1" is: 80040405
+Error number for "Value Not Set 1" is: 80040402
+Error number for "Value Not Set 2" is: 80040403
+Error messages will not be interpreted to infer state.
+ 
+15:45:13.479 Driver Access Checks              OK       
+15:45:13.479 AccessChecks                               About to create instance using Activator.CreateInstance
+15:45:13.495 AccessChecks                      DEBUG    Successfully created driver using Activator.CreateInstance
+15:45:13.511 WaitForAbsolute                   DEBUG    500 Waiting for driver initialisation
+15:45:14.170 AccessChecks                      OK       Successfully created driver using late binding
+15:45:14.170 AccessChecks                               About to set Connected property true
+15:45:14.185 AccessChecks                               About to set Connected property false
+15:45:14.185 AccessChecks                      OK       Successfully connected using late binding
+15:45:14.201 AccessChecks                      INFO     The driver is a .NET object
+15:45:14.201 AccessChecks                      INFO     The AssemblyQualifiedName is: ASCOM.mySQMPLUSASCOM.ObservingConditions, ASCOM.mySQMPLUSASCOM.ObservingCond
+15:45:14.201 AccessChecks                      INFO     The driver implements interface: ASCOM.DeviceInterface.IObservingConditions
+15:45:14.201 ReleaseCOMObjects                 DEBUG      Start of ReleaseCOMObject
+15:45:14.217 AccessChecks                               About to release driver instance
+15:45:14.217 ReleaseCOMObjects                 DEBUG      Unmarshalling ObservingConditions
+15:45:14.217 ReleaseCOMObjects                 DEBUG      Releasing COM object
+15:45:14.232 ReleaseCOMObjects                 DEBUG      ReleaseComObject Exception: The object's type must be __ComObject or derived from __ComObject.
+                                                    Parameter name: o
+15:45:14.232 ReleaseCOMObjects                 DEBUG      End of ReleaseCOMObject
+15:45:14.248 AccessChecks                      DEBUG    Collecting garbage
+15:45:14.257 AccessChecks                      DEBUG    Collecting garbage complete
+15:45:14.279 AccessChecks                      DEBUG    Finished waiting for pending finalisers
+15:45:14.279 WaitForAbsolute                   DEBUG    500 Waiting for device driver to be cleaned up by operating system
+15:45:14.959 AccessChecks                      DEBUG    Successfully created driver through Interface IObservingConditions
+15:45:14.969 AccessChecks                      INFO     Device exposes Interface IObservingConditions
+15:45:14.969 WaitForAbsolute                   DEBUG    500 Waiting For device driver To be cleaned up by operating system
+15:45:15.660 AccessChecks                      OK       Successfully created driver Using driver access toolkit
+15:45:15.675 AccessChecks                      OK       Successfully connected Using driver access toolkit
+ 
+Conform is using ASCOM.DriverAccess.ObservingConditions to get an ObservingConditions object
+15:45:15.722 CreateDevice                      DEBUG    Successfully created driver
+15:45:15.722 ConformanceCheck                  OK       Driver instance created successfully
+15:45:15.801 ConformanceCheck                  OK       Connected OK
+ 
+Common Driver Methods 
+15:45:15.848 InterfaceVersion                           About to get property InterfaceVersion
+15:45:15.848 InterfaceVersion                  OK       1
+15:45:15.895 Connected                                  About to get property Connected
+15:45:15.895 Connected                         OK       True
+15:45:15.942 Description                                About to get property Description
+15:45:15.942 Description                       OK       mySQM+ ASCOM OC
+15:45:15.989 DriverInfo                                 About to get property DriverInfo
+15:45:15.989 DriverInfo                        OK       mySQM+ OC ASCOM driver - R Brown 2020-2021
+15:45:16.036 DriverVersion                              About to get property DriverVersion
+15:45:16.036 DriverVersion                     OK       0.0.16
+15:45:16.083 Name                                       About to get property Name
+15:45:16.083 Name                              OK       mySQMPLUSASCOM Driver
+15:45:16.130 CommandString                     INFO     Conform cannot test the CommandString method
+15:45:16.130 CommandBlind                      INFO     Conform cannot test the CommandBlind method
+15:45:16.130 CommandBool                       INFO     Conform cannot test the CommandBool method
+15:45:16.130 Action                            INFO     Conform cannot test the Action method
+15:45:16.146 SupportedActions                           About to call method SupportedActions
+15:45:16.146 SupportedActions                  OK       Found action: DewPoint
+15:45:16.146 SupportedActions                  OK       Found action: Humidity
+15:45:16.146 SupportedActions                  OK       Found action: Pressure
+15:45:16.161 SupportedActions                  OK       Found action: SkyBrightness
+15:45:16.177 SupportedActions                  OK       Found action: SkyQuality
+15:45:16.177 SupportedActions                  OK       Found action: SkyTemperature
+15:45:16.177 SupportedActions                  OK       Found action: Temperature
+15:45:16.177 SupportedActions                  OK       Found action: AveragePeriod
+15:45:16.193 SupportedActions                  OK       Found action: CloudCover
+15:45:16.208 SupportedActions                  OK       Found action: WindDirection
+15:45:16.208 SupportedActions                  OK       Found action: WindSpeed
+15:45:16.208 SupportedActions                  OK       Found action: RateRate
+ 
+Properties 
+15:45:16.349 TestDouble                        DEBUG    methodName: AveragePeriod, SensorName: AveragePeriod
+15:45:16.362 AveragePeriod                     OK       0
+15:45:16.365 AveragePeriod Write               OK       Invalid Value exception generated as expected on set average period < -1.0
+15:45:16.365 AveragePeriod Write               OK       Successfully set average period to 0.0
+15:45:16.381 AveragePeriod Write               OK       Invalid value exception thrown when average period is set to 5.0, which is permitted by the specification
+15:45:16.381 AveragePeriod Write               OK       Successfully restored original average period: 0
+15:45:16.381 TestDouble                        DEBUG    methodName: CloudCover, SensorName: CloudCover
+15:45:16.396 CloudCover                        OK       71.6
+15:45:16.412 TestDouble                        DEBUG    methodName: DewPoint, SensorName: DewPoint
+15:45:16.412 DewPoint                          OK       -49.34
+15:45:16.412 TestDouble                        DEBUG    methodName: Humidity, SensorName: Humidity
+15:45:16.412 Humidity                          OK       55.4
+15:45:16.428 DewPoint & Humidity               OK       Dew point and humidity are both implemented per the interface specification
+15:45:16.428 TestDouble                        DEBUG    methodName: Pressure, SensorName: Pressure
+15:45:16.428 Pressure                          OK       11
+15:45:16.443 TestDouble                        DEBUG    methodName: RainRate, SensorName: RainRate
+15:45:16.443 RainRate                          OK       1.14
+15:45:16.443 TestDouble                        DEBUG    methodName: SkyBrightness, SensorName: SkyBrightness
+15:45:16.459 SkyBrightness                     OK       1000
+15:45:16.462 TestDouble                        DEBUG    methodName: SkyQuality, SensorName: SkyQuality
+15:45:16.475 SkyQuality                        OK       5.084
+15:45:16.475 TestDouble                        DEBUG    methodName: StarFWHM, SensorName: StarFWHM
+15:45:16.475 StarFWHM                          OK       Optional member threw a PropertyNotImplementedException exception.
+15:45:16.491 StarFWHM                          DEBUG    Exception: ASCOM.PropertyNotImplementedException: Property read StarFWHM is not implemented in this driver. ---> ASCOM.PropertyNotImplementedException: Property read StarFWHM is not implemented in this driver.
+                                                       at ASCOM.mySQMPLUSASCOM.ObservingConditions.get_StarFWHM()
+                                                       --- End of inner exception stack trace ---
+                                                       at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+                                                       at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+                                                       at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+                                                       at Conform.ObservingConditionsTester.TestDouble(String p_Nmae, ObservingConditionsProperty p_Type, Double p_Min, Double p_Max, Required p_Mandatory) in J:\Conform\Conform\Devices\ObservingConditionsTester.vb:line 462
+15:45:16.491 TestDouble                        DEBUG    methodName: SkyTemperature, SensorName: SkyTemperature
+15:45:16.491 SkyTemperature                    OK       -2.13
+15:45:16.506 TestDouble                        DEBUG    methodName: Temperature, SensorName: Temperature
+15:45:16.506 Temperature                       OK       4.37
+15:45:16.506 TestDouble                        DEBUG    methodName: WindDirection, SensorName: WindDirection
+15:45:16.522 WindDirection                     OK       0
+15:45:16.522 TestDouble                        DEBUG    methodName: WindGust, SensorName: WindGust
+15:45:16.537 WindGust                          OK       0
+15:45:16.537 TestDouble                        DEBUG    methodName: WindSpeed, SensorName: WindSpeed
+15:45:16.537 WindSpeed                         OK       5.2
+ 
+Methods 
+15:45:16.600 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateLatest, SensorName: Latest
+15:45:16.600 TimeSinceLastUpdateLatest         OK       5
+15:45:16.600 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateCloudCover, SensorName: CloudCover
+15:45:16.616 TimeSinceLastUpdateCloudCover     OK       5
+15:45:16.616 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateDewPoint, SensorName: DewPoint
+15:45:16.616 TimeSinceLastUpdateDewPoint       OK       5
+15:45:16.616 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateHumidity, SensorName: Humidity
+15:45:16.632 TimeSinceLastUpdateHumidity       OK       5
+15:45:16.647 DewPoint & Humidity               OK       Dew point and humidity are both implemented per the interface specification
+15:45:16.647 TestDouble                        DEBUG    methodName: TimeSinceLastUpdatePressure, SensorName: Pressure
+15:45:16.647 TimeSinceLastUpdatePressure       OK       5
+15:45:16.663 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateRainRate, SensorName: RainRate
+15:45:16.663 TimeSinceLastUpdateRainRate       OK       5
+15:45:16.679 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateSkyBrightness, SensorName: SkyBrightness
+15:45:16.679 TimeSinceLastUpdateSkyBrightness  OK       5
+15:45:16.679 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateSkyQuality, SensorName: SkyQuality
+15:45:16.679 TimeSinceLastUpdateSkyQuality     OK       5
+15:45:16.695 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateStarFWHM, SensorName: StarFWHM
+15:45:16.710 TimeSinceLastUpdateStarFWHM       OK       Optional member threw a MethodNotImplementedException exception.
+15:45:16.710 TimeSinceLastUpdateStarFWHM       DEBUG    Exception: ASCOM.MethodNotImplementedException: Method StarFWHM is not implemented in this driver. ---> ASCOM.MethodNotImplementedException: Method StarFWHM is not implemented in this driver.
+                                                       at ASCOM.mySQMPLUSASCOM.ObservingConditions.TimeSinceLastUpdate(String PropertyName)
+                                                       --- End of inner exception stack trace ---
+                                                       at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+                                                       at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+                                                       at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+                                                       at Conform.ObservingConditionsTester.TestDouble(String p_Nmae, ObservingConditionsProperty p_Type, Double p_Min, Double p_Max, Required p_Mandatory) in J:\Conform\Conform\Devices\ObservingConditionsTester.vb:line 492
+15:45:16.710 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateSkyTemperature, SensorName: SkyTemperature
+15:45:16.726 TimeSinceLastUpdateSkyTemperature OK       5
+15:45:16.726 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateTemperature, SensorName: Temperature
+15:45:16.741 TimeSinceLastUpdateTemperature    OK       5
+15:45:16.741 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateWindDirection, SensorName: WindDirection
+15:45:16.741 TimeSinceLastUpdateWindDirection  OK       5
+15:45:16.757 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateWindGust, SensorName: WindGust
+15:45:16.763 TimeSinceLastUpdateWindGust       OK       5
+15:45:16.773 TestDouble                        DEBUG    methodName: TimeSinceLastUpdateWindSpeed, SensorName: WindSpeed
+15:45:16.773 TimeSinceLastUpdateWindSpeed      OK       5
+15:45:16.773 Refresh                           OK       Refreshed OK
+15:45:16.789 SensorDescriptionCloudCover       OK       Cloud cover as % from 0-100
+15:45:16.789 SensorDescriptionDewPoint         OK       Calculated dewpoint
+15:45:16.804 SensorDescriptionHumidity         OK       Relative Humdity
+15:45:16.804 DewPoint & Humidity               OK       Dew point and humidity are both implemented per the interface specification
+15:45:16.804 SensorDescriptionPressure         OK       Atmospheric Pressure
+15:45:16.820 SensorDescriptionRainRate         OK       Rainrate cummulative total (mm) for current hour
+15:45:16.820 SensorDescriptionSkyBrightness    OK       Sky brightness in Lux
+15:45:16.836 SensorDescriptionSkyQuality       OK       SQM reading
+15:45:16.836 SensorDescriptionStarFWHM         OK       Optional member threw a MethodNotImplementedException exception.
+15:45:16.836 SensorDescriptionStarFWHM         DEBUG    Exception: ASCOM.MethodNotImplementedException: Method SensorDescription(StarFWHM) is not implemented in this driver. ---> ASCOM.MethodNotImplementedException: Method SensorDescription(StarFWHM) is not implemented in this driver.
+                                                       at ASCOM.mySQMPLUSASCOM.ObservingConditions.SensorDescription(String PropertyName)
+                                                       --- End of inner exception stack trace ---
+                                                       at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+                                                       at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+                                                       at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+                                                       at Conform.ObservingConditionsTester.TestSensorDescription(String p_Nmae, ObservingConditionsProperty p_Type, Int32 p_MaxLength, Required p_Mandatory) in J:\Conform\Conform\Devices\ObservingConditionsTester.vb:line 575
+15:45:16.851 SensorDescriptionSkyTemperature   OK       IR Object Sky temperature
+15:45:16.863 SensorDescriptionTemperature      OK       Ambient temperature
+15:45:16.867 SensorDescriptionWindDirection    OK       Wind direction. 0 = North
+15:45:16.867 SensorDescriptionWindGust         OK       Wind gust in m/s
+15:45:16.867 SensorDescriptionWindSpeed        OK       Wind speed in m/s
+15:45:16.867 Consistency                       DEBUG    Sensor name: CloudCover
+15:45:16.898 Consistency - CloudCover          OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.898 Consistency                       DEBUG    Sensor name: DewPoint
+15:45:16.898 Consistency - DewPoint            OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.898 Consistency                       DEBUG    Sensor name: Humidity
+15:45:16.914 Consistency - Humidity            OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.914 Consistency                       DEBUG    Sensor name: Pressure
+15:45:16.914 Consistency - Pressure            OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.930 Consistency                       DEBUG    Sensor name: RainRate
+15:45:16.930 Consistency - RainRate            OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.945 Consistency                       DEBUG    Sensor name: SkyBrightness
+15:45:16.945 Consistency - SkyBrightness       OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.945 Consistency                       DEBUG    Sensor name: SkyQuality
+15:45:16.963 Consistency - SkyQuality          OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.977 Consistency                       DEBUG    Sensor name: SkyTemperature
+15:45:16.977 Consistency - SkyTemperature      OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.977 Consistency                       DEBUG    Sensor name: StarFWHM
+15:45:16.977 Consistency - StarFWHM            OK       Sensor value, description and time since last update are all not implemented as required by the specification
+15:45:16.993 Consistency                       DEBUG    Sensor name: Temperature
+15:45:16.993 Consistency - Temperature         OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:16.993 Consistency                       DEBUG    Sensor name: WindDirection
+15:45:17.008 Consistency - WindDirection       OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:17.008 Consistency                       DEBUG    Sensor name: WindGust
+15:45:17.008 Consistency - WindGust            OK       Sensor value, description and time since last update are all implemented as required by the specification
+15:45:17.024 Consistency                       DEBUG    Sensor name: WindSpeed
+15:45:17.039 Consistency - WindSpeed           OK       Sensor value, description and time since last update are all implemented as required by the specification
+ 
+Conformance test complete 
+ 
+No errors, warnings or issues found: your driver passes ASCOM validation!! 

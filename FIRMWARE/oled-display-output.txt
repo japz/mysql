@@ -1,0 +1,89 @@
+Number of Screens = 9
+Screen is 8 rows by 16 chars per row
+
+Screen 1 [SQM and CLOUD %]
+Screen 2 [NELM/LUX/RAIN/SKYSTATE/CLOUD%]
+Screen 3 [HUMIDITY/AMBIENT/DEWPOINT/PRESSURE/SKY-A/SKY-O/WINDC/F]
+Screen 4 [Wind Info and Units of Measurement]
+Screen 5 [CONTROLLER STATUS]
+Screen 6 [MQTT]
+Screen 7 [GPS]
+Screen 8 [GPS date/time]
+Screen 9 [RTC/NTP date/time]
+
+Screen 1 [SQM and CLOUD %]
+SQM
+[sqm_value]
+Clouds [cloud_cover_percentage]
+
+Screen 2 [NELM/LUX/RAIN/SKYSTATE/CLOUD%]
+NELM = 
+LUX  = 
+RAIN?=
+RVout= 
+Rainh=
+SkyState= CLEAR | CLOUDY
+Cloud% = 
+Pg 2
+
+Screen 3 [HUMIDITY/AMBIENT/DEWPOINT/PRESSURE/SKY-A/SKY-O/WINDC/F]
+HUMIDITY: 
+AMBIENT :
+DEWPOINT:
+PRESSURE:
+SKY-A   :
+SKY-O   :
+WIND C/F:
+Pg 3
+
+Screen 4 [Wind Info and Units of Measurement]
+Wspd: [wind_speed] kph | mph
+Bsca: [Beaufort scale 1-12]
+Wdir: [wind_direction]
+TMod: [Time Format: Celsius | Fahrenheit]
+DMod: [Distance Format: Metric | Imperial ]
+Pg 4
+
+Screen 5 [CONTROLLER STATUS]
+ACCESSPOINTMODE | STATIONMODE
+PORT =  
+SSID =  
+IP   = 
+WEBSERVER
+PORT =  
+Pg 5
+
+Screen 6 [MQTT]
+MQTT-SERVICE
+MQTT-BrokerIP:
+[ip+address]
+PORT = 
+MQTT STATE:
+Connected | Not connected
+Pg 6
+
+Screen 7 [GPS]
+LAT:
+LON:
+ALT:  
+SAT:
+FIX:
+TRUNCGPS : 
+STATICGPS:
+Pg 7
+
+Screen 8 [GPS TIME]
+UTC: date
+UTC: time 
+LOC: date
+LOC: time
+Pg 8
+
+Screen 9 [RTC/NTP]
+RTC: date
+RTC: time
+NTP: date			// utc
+NTP: time			// utc
+LOC: date
+LOC: time
+Pg 9

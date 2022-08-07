@@ -1,0 +1,14 @@
+mySQM+ TCPIP-LOGGER Windows Application
+(c) Robert Brown 2021-2022, All rights reserved.
+rbb1brown@gmail.com
+
+Permission is granted for personal/academic/education use only.
+
+
+This is the full source and executable files for the application.
+
+The install executable is found in the folder
+
+mySQMPLUS-TCPIPLOGGER\mySQMPLUS-TCPIPLOGGER\publish
+
+To install run setup.exe
